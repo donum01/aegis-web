@@ -9,7 +9,7 @@ type ThemeContextValue = {
   toggleTheme: () => void
 }
 
-const THEME_STORAGE_KEY = "hw_theme"
+const THEME_STORAGE_KEY = "aegis_theme"
 const ThemeContext = createContext<ThemeContextValue | null>(null)
 
 export function ThemeProvider({ children }: { children: ReactNode }) {

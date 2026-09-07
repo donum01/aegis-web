@@ -1,11 +1,11 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { AppShell } from "@/components/hashwhale/app-shell"
-import { useTheme } from "@/components/hashwhale/theme-provider"
-import { Toast, type ToastVariant } from "@/components/hashwhale/toast"
-import { TransactionHistory } from "@/components/hashwhale/transaction-history"
-import { WalletBalanceCard } from "@/components/hashwhale/wallet-balance-card"
+import { AppShell } from "@/components/aegis/app-shell"
+import { useTheme } from "@/components/aegis/theme-provider"
+import { Toast, type ToastVariant } from "@/components/aegis/toast"
+import { TransactionHistory } from "@/components/aegis/transaction-history"
+import { WalletBalanceCard } from "@/components/aegis/wallet-balance-card"
 import {
   apiBorrowConfigurationToBorrowConfiguration,
   PRICE_CONFIGURATION_POLL_MS,
@@ -23,7 +23,7 @@ import {
 } from "@/lib/wallet"
 import { api } from "@/lib/api"
 import { HISTORY_BATCH_SIZE, historyPageState, type HistoryPageState } from "@/lib/history"
-import { PriceStatus } from "@/components/hashwhale/price-status"
+import { PriceStatus } from "@/components/aegis/price-status"
 import { useAuthUser } from "@/lib/use-auth-user"
 
 const EMPTY_HISTORY_PAGE: HistoryPageState = { hasMore: false, nextCursor: null }
@@ -163,26 +163,26 @@ export default function WalletPage() {
   return (
     <AppShell theme={theme} onToggleTheme={toggleTheme}>
         {!authReady || loading ? (
-          <p className="text-sm" style={{ color: "var(--hw-muted)" }}>
+          <p className="text-sm" style={{ color: "var(--aegis-muted)" }}>
             Loading your wallet…
           </p>
         ) : !userId ? (
-          <p className="text-sm" style={{ color: "var(--hw-error)" }}>
+          <p className="text-sm" style={{ color: "var(--aegis-error)" }}>
             Please log in to view your wallet.
           </p>
         ) : !configuration ? (
-          <p className="text-sm" style={{ color: "var(--hw-error)" }}>
+          <p className="text-sm" style={{ color: "var(--aegis-error)" }}>
             Price configuration is unavailable. Please refresh and try again.
           </p>
         ) : (
           <div className="flex flex-col gap-6">
-            <section className="hw-page-header" aria-labelledby="wallet-heading">
+            <section className="aegis-page-header" aria-labelledby="wallet-heading">
               <div>
-                <p className="hw-eyebrow">Portfolio</p>
+                <p className="aegis-eyebrow">Portfolio</p>
                 <h1 id="wallet-heading" className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
                   Wallet
                 </h1>
-                <p className="mt-1.5 text-sm" style={{ color: "var(--hw-muted)" }}>
+                <p className="mt-1.5 text-sm" style={{ color: "var(--aegis-muted)" }}>
                   View available funds, locked balances, and account activity.
                 </p>
               </div>
@@ -190,17 +190,17 @@ export default function WalletPage() {
             <PriceStatus configuration={configuration} />
 
             {/* Hero summary */}
-            <div className="hw-card-in hw-card p-5 sm:p-7">
-              <p className="hw-eyebrow">
+            <div className="aegis-card-in aegis-card p-5 sm:p-7">
+              <p className="aegis-eyebrow">
                 Total portfolio value
               </p>
               <p
                 className="mt-3 text-3xl font-semibold tabular-nums tracking-tight sm:text-4xl"
-                style={{ color: "var(--hw-text)" }}
+                style={{ color: "var(--aegis-text)" }}
               >
                 {usdValueFormatter.format(total)}
               </p>
-              <p className="mt-2 text-sm" style={{ color: "var(--hw-muted)" }}>
+              <p className="mt-2 text-sm" style={{ color: "var(--aegis-muted)" }}>
                 Across {displayBalances.filter((b) => b.availableAmount + b.lockedAmount > 0).length} of{" "}
                 {displayBalances.length} assets
               </p>
@@ -211,10 +211,10 @@ export default function WalletPage() {
               <div className="mb-3 flex items-end justify-between gap-4">
                 <div>
                   <h2 className="text-lg font-semibold">Assets</h2>
-                  <p className="mt-1 text-xs" style={{ color: "var(--hw-muted)" }}>Available and committed balances</p>
+                  <p className="mt-1 text-xs" style={{ color: "var(--aegis-muted)" }}>Available and committed balances</p>
                 </div>
               </div>
-              <div className="hw-card overflow-hidden">
+              <div className="aegis-card overflow-hidden">
                 {displayBalances.map((b) => (
                   <WalletBalanceCard
                     key={b.asset}

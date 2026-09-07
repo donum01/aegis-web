@@ -1,13 +1,13 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { AppShell } from "@/components/hashwhale/app-shell"
-import { EarnPositions } from "@/components/hashwhale/earn-positions"
-import { EarnSubscribeForm } from "@/components/hashwhale/earn-subscribe-form"
-import { EarnSummary } from "@/components/hashwhale/earn-summary"
-import { Toast, type ToastVariant } from "@/components/hashwhale/toast"
-import { TransactionHistory } from "@/components/hashwhale/transaction-history"
-import { useTheme } from "@/components/hashwhale/theme-provider"
+import { AppShell } from "@/components/aegis/app-shell"
+import { EarnPositions } from "@/components/aegis/earn-positions"
+import { EarnSubscribeForm } from "@/components/aegis/earn-subscribe-form"
+import { EarnSummary } from "@/components/aegis/earn-summary"
+import { Toast, type ToastVariant } from "@/components/aegis/toast"
+import { TransactionHistory } from "@/components/aegis/transaction-history"
+import { useTheme } from "@/components/aegis/theme-provider"
 import { api } from "@/lib/api"
 import {
   apiEarnPositionToEarnPosition,
@@ -246,43 +246,43 @@ export default function EarnPage() {
   return (
     <AppShell theme={theme} onToggleTheme={toggleTheme}>
       {!authReady || loading ? (
-        <div className="flex items-center gap-3 py-12 text-sm" style={{ color: "var(--hw-muted)" }}>
-          <span className="h-2.5 w-2.5 animate-pulse rounded-full" style={{ background: "var(--hw-primary)" }} />
+        <div className="flex items-center gap-3 py-12 text-sm" style={{ color: "var(--aegis-muted)" }}>
+          <span className="h-2.5 w-2.5 animate-pulse rounded-full" style={{ background: "var(--aegis-primary)" }} />
           Loading Earn products and positions…
         </div>
       ) : !userId ? (
-        <p className="text-sm" style={{ color: "var(--hw-error)" }}>
+        <p className="text-sm" style={{ color: "var(--aegis-error)" }}>
           Please log in to access Earn.
         </p>
       ) : loadError || !summary ? (
-        <div className="hw-card max-w-lg p-6">
-          <p className="text-sm font-semibold" style={{ color: "var(--hw-error)" }}>{loadError ?? "Earn is unavailable."}</p>
+        <div className="aegis-card max-w-lg p-6">
+          <p className="text-sm font-semibold" style={{ color: "var(--aegis-error)" }}>{loadError ?? "Earn is unavailable."}</p>
           <button
             type="button"
             onClick={() => {
               setLoading(true)
               void refreshData()
             }}
-            className="hw-btn-outline mt-4 px-4 py-2 text-sm font-semibold"
+            className="aegis-btn-outline mt-4 px-4 py-2 text-sm font-semibold"
           >
             Try again
           </button>
         </div>
       ) : (
         <div className="flex flex-col gap-7">
-          <section className="hw-page-header" aria-labelledby="earn-heading">
+          <section className="aegis-page-header" aria-labelledby="earn-heading">
             <div>
-              <p className="hw-eyebrow">Yield products</p>
-              <h1 id="earn-heading" className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl" style={{ color: "var(--hw-text)" }}>
+              <p className="aegis-eyebrow">Yield products</p>
+              <h1 id="earn-heading" className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl" style={{ color: "var(--aegis-text)" }}>
                 Earn
               </h1>
-              <p className="mt-1.5 max-w-2xl text-sm leading-relaxed" style={{ color: "var(--hw-muted)" }}>
+              <p className="mt-1.5 max-w-2xl text-sm leading-relaxed" style={{ color: "var(--aegis-muted)" }}>
                 Choose an asset and term, preview the return, and create a simulated yield position.
               </p>
             </div>
             <div
               className="rounded-lg border px-3 py-2 text-xs font-semibold"
-              style={{ borderColor: "var(--hw-card-border)", color: "var(--hw-muted)", background: "var(--hw-card)" }}
+              style={{ borderColor: "var(--aegis-card-border)", color: "var(--aegis-muted)", background: "var(--aegis-card)" }}
             >
               APY · simple daily accrual
             </div>

@@ -30,7 +30,7 @@ export function PriceStatus({ configuration }: PriceStatusProps) {
   return (
     <div
       className="flex items-center gap-2 text-xs"
-      style={{ color: isCurrent ? "var(--hw-success)" : "var(--hw-muted)" }}
+      style={{ color: isCurrent ? "var(--aegis-success)" : "var(--aegis-muted)" }}
       role="status"
       aria-live="polite"
     >

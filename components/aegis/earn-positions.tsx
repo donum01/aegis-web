@@ -63,17 +63,17 @@ export function EarnPositions({
   }
 
   return (
-    <section className="hw-card p-5 sm:p-6" aria-labelledby="earn-positions-heading">
+    <section className="aegis-card p-5 sm:p-6" aria-labelledby="earn-positions-heading">
       <div className="mb-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 id="earn-positions-heading" className="text-xl font-bold" style={{ color: "var(--hw-text)" }}>
+          <h2 id="earn-positions-heading" className="text-xl font-bold" style={{ color: "var(--aegis-text)" }}>
             Your positions
           </h2>
-          <p className="mt-1 text-sm" style={{ color: "var(--hw-muted)" }}>
+          <p className="mt-1 text-sm" style={{ color: "var(--aegis-muted)" }}>
             Track accrued rewards and maturity progress.
           </p>
         </div>
-        <div className="hw-tabs grid grid-cols-2 gap-1 p-1">
+        <div className="aegis-tabs grid grid-cols-2 gap-1 p-1">
           {(["ACTIVE", "HISTORY"] as const).map((value) => (
             <button
               key={value}
@@ -84,9 +84,9 @@ export function EarnPositions({
               }}
               className="rounded-lg px-4 py-2 text-xs font-semibold transition-colors"
               style={{
-                background: tab === value ? "var(--hw-indicator)" : "transparent",
-                color: tab === value ? "var(--hw-text)" : "var(--hw-muted)",
-                boxShadow: tab === value ? "0 2px 8px rgba(13, 83, 255, 0.12)" : "none",
+                background: tab === value ? "var(--aegis-indicator)" : "transparent",
+                color: tab === value ? "var(--aegis-text)" : "var(--aegis-muted)",
+                boxShadow: tab === value ? "0 2px 8px rgba(20, 123, 157, 0.14)" : "none",
               }}
               aria-pressed={tab === value}
             >
@@ -100,11 +100,11 @@ export function EarnPositions({
 
       {actionError ? (
         <div
-          className="hw-fade-slide mb-4 rounded-lg px-3 py-2.5 text-sm font-medium"
+          className="aegis-fade-slide mb-4 rounded-lg px-3 py-2.5 text-sm font-medium"
           style={{
-            color: "var(--hw-error)",
-            background: "rgba(255, 100, 13, 0.1)",
-            border: "1px solid rgba(255, 100, 13, 0.3)",
+            color: "var(--aegis-error)",
+            background: "color-mix(in srgb, var(--aegis-error) 10%, transparent)",
+            border: "1px solid color-mix(in srgb, var(--aegis-error) 30%, transparent)",
           }}
           role="alert"
         >
@@ -116,15 +116,15 @@ export function EarnPositions({
         <div className="flex flex-col items-center gap-3 py-12 text-center">
           <span
             className="flex h-14 w-14 items-center justify-center rounded-full"
-            style={{ background: "var(--hw-primary-soft)", color: "var(--hw-primary)" }}
+            style={{ background: "var(--aegis-primary-soft)", color: "var(--aegis-primary)" }}
           >
             <PiggyBank className="h-7 w-7" aria-hidden="true" />
           </span>
           <div>
-            <p className="text-sm font-semibold" style={{ color: "var(--hw-text)" }}>
+            <p className="text-sm font-semibold" style={{ color: "var(--aegis-text)" }}>
               {tab === "ACTIVE" ? "No active positions" : "No completed positions"}
             </p>
-            <p className="mt-1 text-xs" style={{ color: "var(--hw-muted)" }}>
+            <p className="mt-1 text-xs" style={{ color: "var(--aegis-muted)" }}>
               {tab === "ACTIVE" ? "Choose a product above to put a balance to work." : "Withdrawn positions will appear here."}
             </p>
           </div>
@@ -139,21 +139,21 @@ export function EarnPositions({
             return (
               <article
                 key={position.id}
-                className="hw-card-in rounded-xl p-5"
+                className="aegis-card-in rounded-xl p-5"
                 style={{
                   animationDelay: `${index * 55}ms`,
-                  background: "var(--hw-input-bg)",
-                  border: "1px solid var(--hw-input-border)",
+                  background: "var(--aegis-input-bg)",
+                  border: "1px solid var(--aegis-input-border)",
                 }}
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex items-center gap-3">
                     <AssetChip asset={position.asset} size={40} />
                     <div>
-                      <p className="font-bold" style={{ color: "var(--hw-text)" }}>
+                      <p className="font-bold" style={{ color: "var(--aegis-text)" }}>
                         {position.asset} · {earnTermLabel(position.termType)}
                       </p>
-                      <p className="mt-0.5 text-xs" style={{ color: "var(--hw-muted)" }}>
+                      <p className="mt-0.5 text-xs" style={{ color: "var(--aegis-muted)" }}>
                         Started {formatEarnDate(position.startDate)} · #{position.id}
                       </p>
                     </div>
@@ -161,8 +161,8 @@ export function EarnPositions({
                   <span
                     className="rounded-full px-2.5 py-1 text-xs font-bold"
                     style={{
-                      background: position.status === "ACTIVE" ? "var(--hw-primary-soft)" : "var(--hw-track)",
-                      color: position.status === "ACTIVE" ? "var(--hw-primary)" : "var(--hw-muted)",
+                      background: position.status === "ACTIVE" ? "var(--aegis-primary-soft)" : "var(--aegis-track)",
+                      color: position.status === "ACTIVE" ? "var(--aegis-primary)" : "var(--aegis-muted)",
                     }}
                   >
                     {position.status === "ACTIVE" ? "Earning" : "Withdrawn"}
@@ -171,36 +171,36 @@ export function EarnPositions({
 
                 <div className="my-5 grid grid-cols-3 gap-3">
                   <div>
-                    <p className="text-xs" style={{ color: "var(--hw-muted)" }}>Principal</p>
-                    <p className="mt-1 text-sm font-bold tabular-nums" style={{ color: "var(--hw-text)" }}>
+                    <p className="text-xs" style={{ color: "var(--aegis-muted)" }}>Principal</p>
+                    <p className="mt-1 text-sm font-bold tabular-nums" style={{ color: "var(--aegis-text)" }}>
                       {assetAmountFormatter.format(position.principalAmount)}
                     </p>
-                    <p className="text-[11px]" style={{ color: "var(--hw-muted)" }}>{position.asset}</p>
+                    <p className="text-[11px]" style={{ color: "var(--aegis-muted)" }}>{position.asset}</p>
                   </div>
                   <div>
-                    <p className="text-xs" style={{ color: "var(--hw-muted)" }}>APY snapshot</p>
-                    <p className="mt-1 text-sm font-bold tabular-nums" style={{ color: "var(--hw-primary)" }}>
+                    <p className="text-xs" style={{ color: "var(--aegis-muted)" }}>APY snapshot</p>
+                    <p className="mt-1 text-sm font-bold tabular-nums" style={{ color: "var(--aegis-primary)" }}>
                       {formatRate(position.apy)}
                     </p>
-                    <p className="text-[11px]" style={{ color: "var(--hw-muted)" }}>at subscription</p>
+                    <p className="text-[11px]" style={{ color: "var(--aegis-muted)" }}>at subscription</p>
                   </div>
                   <div>
-                    <p className="text-xs" style={{ color: "var(--hw-muted)" }}>Rewards</p>
-                    <p className="mt-1 text-sm font-bold tabular-nums" style={{ color: "var(--hw-ltv-safe)" }}>
+                    <p className="text-xs" style={{ color: "var(--aegis-muted)" }}>Rewards</p>
+                    <p className="mt-1 text-sm font-bold tabular-nums" style={{ color: "var(--aegis-ltv-safe)" }}>
                       +{assetAmountFormatter.format(position.accruedRewards)}
                     </p>
-                    <p className="text-[11px]" style={{ color: "var(--hw-muted)" }}>{position.asset}</p>
+                    <p className="text-[11px]" style={{ color: "var(--aegis-muted)" }}>{position.asset}</p>
                   </div>
                 </div>
 
                 {position.status === "ACTIVE" ? (
                   <div className="mb-5">
                     <div className="mb-2 flex items-center justify-between gap-3 text-xs">
-                      <span className="flex items-center gap-1.5" style={{ color: "var(--hw-muted)" }}>
+                      <span className="flex items-center gap-1.5" style={{ color: "var(--aegis-muted)" }}>
                         {flexible ? <UnlockKeyhole className="h-3.5 w-3.5" /> : <LockKeyhole className="h-3.5 w-3.5" />}
                         {flexible ? "Flexible access" : "Maturity progress"}
                       </span>
-                      <span className="font-semibold" style={{ color: "var(--hw-text)" }}>
+                      <span className="font-semibold" style={{ color: "var(--aegis-text)" }}>
                         {flexible
                           ? "Available now"
                           : position.daysRemaining === 0
@@ -208,35 +208,35 @@ export function EarnPositions({
                             : `${position.daysRemaining} days left`}
                       </span>
                     </div>
-                    <div className="h-2 overflow-hidden rounded-full" style={{ background: "var(--hw-track)" }}>
+                    <div className="h-2 overflow-hidden rounded-full" style={{ background: "var(--aegis-track)" }}>
                       <div
-                        className="hw-earn-progress h-full rounded-full"
-                        style={{ width: `${progress}%`, background: "var(--hw-primary)" }}
+                        className="aegis-earn-progress h-full rounded-full"
+                        style={{ width: `${progress}%`, background: "var(--aegis-primary)" }}
                       />
                     </div>
                     {!flexible && position.endDate ? (
-                      <p className="mt-2 flex items-center gap-1 text-xs" style={{ color: "var(--hw-muted)" }}>
+                      <p className="mt-2 flex items-center gap-1 text-xs" style={{ color: "var(--aegis-muted)" }}>
                         <CalendarClock className="h-3.5 w-3.5" aria-hidden="true" />
                         Matures {formatEarnDate(position.endDate)}
                       </p>
                     ) : null}
                   </div>
                 ) : position.endDate ? (
-                  <p className="mb-5 flex items-center gap-1 text-xs" style={{ color: "var(--hw-muted)" }}>
+                  <p className="mb-5 flex items-center gap-1 text-xs" style={{ color: "var(--aegis-muted)" }}>
                     <Clock3 className="h-3.5 w-3.5" aria-hidden="true" />
                     Closed {formatEarnDate(position.endDate)}
                   </p>
                 ) : null}
 
                 {position.status === "ACTIVE" && confirmingWithdrawId === position.id ? (
-                  <div className="rounded-lg border p-4" style={{ borderColor: "var(--hw-card-border)", background: "var(--hw-track)" }}>
-                    <p className="text-sm font-semibold" style={{ color: "var(--hw-text)" }}>Review Earn withdrawal</p>
-                    <p className="mt-1 text-xs leading-relaxed" style={{ color: "var(--hw-muted)" }}>
+                  <div className="rounded-lg border p-4" style={{ borderColor: "var(--aegis-card-border)", background: "var(--aegis-track)" }}>
+                    <p className="text-sm font-semibold" style={{ color: "var(--aegis-text)" }}>Review Earn withdrawal</p>
+                    <p className="mt-1 text-xs leading-relaxed" style={{ color: "var(--aegis-muted)" }}>
                       Return {assetAmountFormatter.format(position.principalAmount)} {position.asset} principal plus {assetAmountFormatter.format(position.accruedRewards)} {position.asset} accrued rewards to Wallet.
                     </p>
                     <div className="mt-4 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
-                      <button type="button" onClick={() => setConfirmingWithdrawId(null)} disabled={loading} className="hw-btn-outline h-11 px-4 text-sm font-semibold">Cancel</button>
-                      <button type="button" onClick={() => void handleWithdraw(position.id)} disabled={loading} className="hw-submit flex h-11 items-center justify-center gap-2 px-4 text-sm font-semibold">
+                      <button type="button" onClick={() => setConfirmingWithdrawId(null)} disabled={loading} className="aegis-btn-outline h-11 px-4 text-sm font-semibold">Cancel</button>
+                      <button type="button" onClick={() => void handleWithdraw(position.id)} disabled={loading} className="aegis-submit flex h-11 items-center justify-center gap-2 px-4 text-sm font-semibold">
                         {loading ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> : null}
                         Confirm withdrawal
                       </button>
@@ -247,7 +247,7 @@ export function EarnPositions({
                     type="button"
                     onClick={() => setConfirmingWithdrawId(position.id)}
                     disabled={!position.withdrawable || withdrawingId !== null}
-                    className="hw-btn-outline flex h-11 w-full items-center justify-center gap-2 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-50"
+                    className="aegis-btn-outline flex h-11 w-full items-center justify-center gap-2 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-50"
                     title={!position.withdrawable ? "Locked positions can be withdrawn after maturity" : undefined}
                   >
                     {loading ? (
@@ -264,12 +264,12 @@ export function EarnPositions({
             })}
           </div>
           {hasMore ? (
-            <div className="mt-5 flex justify-center border-t pt-5" style={{ borderColor: "var(--hw-card-border)" }}>
+            <div className="mt-5 flex justify-center border-t pt-5" style={{ borderColor: "var(--aegis-card-border)" }}>
               <button
                 type="button"
                 onClick={loadMore}
                 disabled={loadingMore !== null}
-                className="hw-btn-outline flex h-9 items-center justify-center gap-2 px-4 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-60"
+                className="aegis-btn-outline flex h-9 items-center justify-center gap-2 px-4 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {loadingMore === tab ? (
                   <><Loader2 className="h-4 w-4 animate-spin" /> Loading</>

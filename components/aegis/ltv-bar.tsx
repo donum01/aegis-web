@@ -16,11 +16,11 @@ export function LtvBar({ ltv, configuration }: { ltv: number; configuration: Bor
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-baseline justify-between">
-        <span className="text-sm font-medium" style={{ color: "var(--hw-muted)" }}>
+        <span className="text-sm font-medium" style={{ color: "var(--aegis-muted)" }}>
           Loan-to-Value
         </span>
         <span
-          className={`text-sm font-bold tabular-nums ${isDanger ? "hw-warn-pulse" : ""}`}
+          className={`text-sm font-bold tabular-nums ${isDanger ? "aegis-warn-pulse" : ""}`}
           style={{ color }}
         >
           {ltv.toFixed(1)}%
@@ -28,7 +28,7 @@ export function LtvBar({ ltv, configuration }: { ltv: number; configuration: Bor
       </div>
 
       <div
-        className="hw-ltv-track h-2.5 w-full"
+        className="aegis-ltv-track h-2.5 w-full"
         role="progressbar"
         aria-valuenow={Math.min(Math.round(ltv), configuration.maxLtvPercent)}
         aria-valuemin={0}
@@ -37,12 +37,12 @@ export function LtvBar({ ltv, configuration }: { ltv: number; configuration: Bor
         aria-label="Loan-to-value ratio"
       >
         <div
-          className={`hw-ltv-fill h-full ${isDanger ? "hw-warn-pulse" : ""}`}
+          className={`aegis-ltv-fill h-full ${isDanger ? "aegis-warn-pulse" : ""}`}
           style={{ width: `${width}%`, background: color }}
         />
       </div>
 
-      <div className="flex items-center justify-between text-xs" style={{ color: "var(--hw-muted)" }}>
+      <div className="flex items-center justify-between text-xs" style={{ color: "var(--aegis-muted)" }}>
         <span className="font-semibold" style={{ color }}>{status}</span>
         <span>Max {configuration.maxLtvPercent}%</span>
       </div>

@@ -38,10 +38,10 @@ export function Nav({
   return (
     <nav
       aria-label="Primary navigation"
-      className="hw-nav w-full min-w-0 rounded-xl border px-3 py-2 shadow-sm backdrop-blur-xl transition-colors duration-200 sm:px-4"
+      className="aegis-nav w-full min-w-0 rounded-xl border px-3 py-2 shadow-sm backdrop-blur-xl transition-colors duration-200 sm:px-4"
       style={{
-        background: "var(--hw-nav-bg)",
-        borderColor: "var(--hw-card-border)",
+        background: "var(--aegis-nav-bg)",
+        borderColor: "var(--aegis-card-border)",
       }}
     >
       <div className="flex w-full min-w-0 items-center justify-between gap-2">
@@ -61,8 +61,8 @@ export function Nav({
                   aria-current={active ? "page" : undefined}
                   className="rounded-lg px-3 py-2 text-sm font-semibold transition-colors duration-150"
                   style={{
-                    color: active ? "var(--hw-primary)" : "var(--hw-muted)",
-                    background: active ? "var(--hw-primary-soft)" : "transparent",
+                    color: active ? "var(--aegis-primary)" : "var(--aegis-muted)",
+                    background: active ? "var(--aegis-primary-soft)" : "transparent",
                   }}
                 >
                   {link.label}
@@ -73,7 +73,7 @@ export function Nav({
         </div>
 
         <div className="flex shrink-0 items-center gap-2 sm:gap-3">
-          <span className="hw-demo-badge hidden sm:inline-flex">
+          <span className="aegis-demo-badge hidden sm:inline-flex">
             <CircleDot className="h-3 w-3" aria-hidden="true" /> Demo
           </span>
           <ThemeToggle theme={theme} onToggle={onToggleTheme} />
@@ -81,8 +81,8 @@ export function Nav({
           <button
             type="button"
             onClick={logout}
-            className="hidden h-11 items-center gap-1.5 rounded-lg px-3 text-sm font-semibold transition-colors duration-150 hover:bg-[var(--hw-track)] lg:flex"
-            style={{ color: "var(--hw-muted)" }}
+            className="hidden h-11 items-center gap-1.5 rounded-lg px-3 text-sm font-semibold transition-colors duration-150 hover:bg-[var(--aegis-track)] lg:flex"
+            style={{ color: "var(--aegis-muted)" }}
             aria-label="Log out"
           >
             <LogOut className="h-4 w-4" />
@@ -94,7 +94,7 @@ export function Nav({
             type="button"
             onClick={() => setMobileOpen((o) => !o)}
             className="flex h-11 w-11 items-center justify-center rounded-lg transition-colors lg:hidden"
-            style={{ color: "var(--hw-muted)" }}
+            style={{ color: "var(--aegis-muted)" }}
             aria-label="Toggle menu"
             aria-expanded={mobileOpen}
             aria-controls="mobile-navigation"
@@ -117,8 +117,8 @@ export function Nav({
       >
         <div className="flex w-full flex-col gap-1 pt-3">
           <div className="mb-1 flex items-center justify-between px-3 py-2 sm:hidden">
-            <span className="text-xs font-semibold" style={{ color: "var(--hw-muted)" }}>Environment</span>
-            <span className="hw-demo-badge inline-flex"><CircleDot className="h-3 w-3" /> Demo</span>
+            <span className="text-xs font-semibold" style={{ color: "var(--aegis-muted)" }}>Environment</span>
+            <span className="aegis-demo-badge inline-flex"><CircleDot className="h-3 w-3" /> Demo</span>
           </div>
           {LINKS.map((link) => {
             const active = isActivePath(link.href)
@@ -131,8 +131,8 @@ export function Nav({
                 tabIndex={mobileOpen ? 0 : -1}
                 className="rounded-lg px-3 py-2.5 text-sm font-semibold transition-colors duration-200"
                 style={{
-                  color: active ? "var(--hw-primary)" : "var(--hw-muted)",
-                  background: active ? "var(--hw-primary-soft)" : "transparent",
+                  color: active ? "var(--aegis-primary)" : "var(--aegis-muted)",
+                  background: active ? "var(--aegis-primary-soft)" : "transparent",
                 }}
               >
                 {link.label}
@@ -144,7 +144,7 @@ export function Nav({
             onClick={logout}
             tabIndex={mobileOpen ? 0 : -1}
             className="mt-1 flex items-center gap-1.5 rounded-lg px-3 py-2.5 text-left text-sm font-semibold transition-colors duration-200"
-            style={{ color: "var(--hw-error)" }}
+            style={{ color: "var(--aegis-error)" }}
           >
             <LogOut className="h-4 w-4" />
             Log out

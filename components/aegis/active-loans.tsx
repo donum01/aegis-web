@@ -20,7 +20,7 @@ function LtvBadge({ ltv, configuration }: { ltv: number; configuration: BorrowCo
   return (
     <span
       className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-bold tabular-nums ${
-        tier === "danger" ? "hw-warn-pulse" : ""
+        tier === "danger" ? "aegis-warn-pulse" : ""
       }`}
       style={{ color, background: `color-mix(in srgb, ${color} 15%, transparent)` }}
     >
@@ -35,10 +35,10 @@ function LoanStatusBadge({ status }: { status: Loan["status"] }) {
     <span
       className="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold"
       style={{
-        color: repaid ? "var(--hw-ltv-safe)" : "var(--hw-error)",
+        color: repaid ? "var(--aegis-ltv-safe)" : "var(--aegis-error)",
         background: repaid
-          ? "color-mix(in srgb, var(--hw-ltv-safe) 12%, transparent)"
-          : "color-mix(in srgb, var(--hw-error) 12%, transparent)",
+          ? "color-mix(in srgb, var(--aegis-ltv-safe) 12%, transparent)"
+          : "color-mix(in srgb, var(--aegis-error) 12%, transparent)",
       }}
     >
       {repaid ? "Repaid" : "Liquidated"}
@@ -71,15 +71,15 @@ function LoanCard({
   }
 
   return (
-    <article className="hw-data-row p-5">
+    <article className="aegis-data-row p-5">
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-3">
           <AssetChip asset={loan.asset} size={40} />
           <div>
-            <p className="font-bold tabular-nums" style={{ color: "var(--hw-text)" }}>
+            <p className="font-bold tabular-nums" style={{ color: "var(--aegis-text)" }}>
               {formatAssetAmount(loan.collateralAmount, loan.asset)}
             </p>
-            <p className="text-xs" style={{ color: "var(--hw-muted)" }}>Collateral</p>
+            <p className="text-xs" style={{ color: "var(--aegis-muted)" }}>Collateral</p>
           </div>
         </div>
         {active ? <LtvBadge ltv={ltv} configuration={configuration} /> : <LoanStatusBadge status={loan.status} />}
@@ -87,8 +87,8 @@ function LoanCard({
 
       <div className="mt-4 flex items-end justify-between gap-3">
         <div>
-          <p className="text-xs" style={{ color: "var(--hw-muted)" }}>Borrowed</p>
-          <p className="text-lg font-bold tabular-nums" style={{ color: "var(--hw-text)" }}>
+          <p className="text-xs" style={{ color: "var(--aegis-muted)" }}>Borrowed</p>
+          <p className="text-lg font-bold tabular-nums" style={{ color: "var(--aegis-text)" }}>
             {formatAssetAmount(loan.borrowedUsdt, "USDT")}
           </p>
         </div>
@@ -97,7 +97,7 @@ function LoanCard({
             type="button"
             onClick={() => setConfirmingRepayment(true)}
             disabled={repaying}
-            className="hw-btn-outline flex h-11 items-center justify-center gap-1.5 px-4 text-sm font-semibold disabled:opacity-60"
+            className="aegis-btn-outline flex h-11 items-center justify-center gap-1.5 px-4 text-sm font-semibold disabled:opacity-60"
           >
             {repaying ? <><Loader2 className="h-3.5 w-3.5 animate-spin" /> Repaying</> : "Repay"}
           </button>
@@ -108,39 +108,39 @@ function LoanCard({
         <>
           <p
             className="mt-3 text-xs font-medium tabular-nums"
-            style={{ color: showLiqWarning ? "var(--hw-error)" : "var(--hw-muted)" }}
+            style={{ color: showLiqWarning ? "var(--aegis-error)" : "var(--aegis-muted)" }}
           >
             Liquidation price: {usdValueFormatter.format(liq)}
           </p>
-          <p className="mt-1 text-xs tabular-nums" style={{ color: "var(--hw-muted)" }}>
+          <p className="mt-1 text-xs tabular-nums" style={{ color: "var(--aegis-muted)" }}>
             Interest rate: {formatRate(loan.interestRateApr)} APR
           </p>
         </>
       ) : (
-        <p className="mt-3 text-xs tabular-nums" style={{ color: "var(--hw-muted)" }}>
+        <p className="mt-3 text-xs tabular-nums" style={{ color: "var(--aegis-muted)" }}>
           Final status: {loan.status === "REPAID" ? "Collateral released" : "Collateral liquidated"}
         </p>
       )}
       {active && confirmingRepayment ? (
-        <div className="mt-4 rounded-lg border p-4" style={{ borderColor: "var(--hw-card-border)", background: "var(--hw-track)" }}>
-          <p className="text-sm font-semibold" style={{ color: "var(--hw-text)" }}>Review repayment</p>
+        <div className="mt-4 rounded-lg border p-4" style={{ borderColor: "var(--aegis-card-border)", background: "var(--aegis-track)" }}>
+          <p className="text-sm font-semibold" style={{ color: "var(--aegis-text)" }}>Review repayment</p>
           <dl className="mt-3 grid grid-cols-1 gap-2 text-sm sm:grid-cols-2">
-            <div><dt style={{ color: "var(--hw-muted)" }}>Principal due</dt><dd className="font-semibold tabular-nums">{formatAssetAmount(loan.borrowedUsdt, "USDT")}</dd></div>
-            <div><dt style={{ color: "var(--hw-muted)" }}>Collateral released</dt><dd className="font-semibold tabular-nums">{formatAssetAmount(loan.collateralAmount, loan.asset)}</dd></div>
+            <div><dt style={{ color: "var(--aegis-muted)" }}>Principal due</dt><dd className="font-semibold tabular-nums">{formatAssetAmount(loan.borrowedUsdt, "USDT")}</dd></div>
+            <div><dt style={{ color: "var(--aegis-muted)" }}>Collateral released</dt><dd className="font-semibold tabular-nums">{formatAssetAmount(loan.collateralAmount, loan.asset)}</dd></div>
           </dl>
-          <p className="mt-3 text-xs leading-relaxed" style={{ color: "var(--hw-muted)" }}>
+          <p className="mt-3 text-xs leading-relaxed" style={{ color: "var(--aegis-muted)" }}>
             This demo repayment uses the recorded principal; accrued interest is not currently charged.
           </p>
           <div className="mt-4 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
-            <button type="button" onClick={() => setConfirmingRepayment(false)} disabled={repaying} className="hw-btn-outline h-11 px-4 text-sm font-semibold">Cancel</button>
-            <button type="button" onClick={() => void repay()} disabled={repaying} className="hw-submit flex h-11 items-center justify-center gap-2 px-4 text-sm font-semibold">
+            <button type="button" onClick={() => setConfirmingRepayment(false)} disabled={repaying} className="aegis-btn-outline h-11 px-4 text-sm font-semibold">Cancel</button>
+            <button type="button" onClick={() => void repay()} disabled={repaying} className="aegis-submit flex h-11 items-center justify-center gap-2 px-4 text-sm font-semibold">
               {repaying ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> : null}
               Confirm repayment
             </button>
           </div>
         </div>
       ) : null}
-      <p className="mt-2 flex items-center gap-1.5 text-xs" style={{ color: "var(--hw-muted)" }}>
+      <p className="mt-2 flex items-center gap-1.5 text-xs" style={{ color: "var(--aegis-muted)" }}>
         <CalendarClock className="h-3.5 w-3.5" aria-hidden="true" />
         <span>Opened</span>
         <time dateTime={loan.createdAt}>{loanDateTimeFormatter.format(new Date(loan.createdAt))}</time>
@@ -153,17 +153,17 @@ function LoanCard({
 function EmptyState({ tab }: { tab: "ACTIVE" | "HISTORY" }) {
   const active = tab === "ACTIVE"
   return (
-    <div className="hw-card flex flex-col items-center justify-center gap-3 px-6 py-14 text-center" style={{ borderStyle: "dashed" }}>
+    <div className="aegis-card flex flex-col items-center justify-center gap-3 px-6 py-14 text-center" style={{ borderStyle: "dashed" }}>
       <span
         className="flex h-12 w-12 items-center justify-center rounded-full"
-        style={{ background: "var(--hw-primary-soft)", color: "var(--hw-primary)" }}
+        style={{ background: "var(--aegis-primary-soft)", color: "var(--aegis-primary)" }}
       >
         {active ? <Wallet className="h-6 w-6" /> : <History className="h-6 w-6" />}
       </span>
-      <p className="font-semibold" style={{ color: "var(--hw-text)" }}>
+      <p className="font-semibold" style={{ color: "var(--aegis-text)" }}>
         {active ? "No active loans" : "No closed loans"}
       </p>
-      <p className="max-w-[260px] text-sm leading-relaxed" style={{ color: "var(--hw-muted)" }}>
+      <p className="max-w-[260px] text-sm leading-relaxed" style={{ color: "var(--aegis-muted)" }}>
         {active
           ? "Create a collateral-backed loan and it will appear here."
           : "Repaid and liquidated loans will appear here."}
@@ -202,10 +202,10 @@ export function ActiveLoans({
     <section className="flex flex-col gap-4" aria-labelledby="loan-list-heading">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h2 id="loan-list-heading" className="text-lg font-semibold" style={{ color: "var(--hw-text)" }}>Loans</h2>
-          <p className="mt-1 text-xs" style={{ color: "var(--hw-muted)" }}>Open positions and account history</p>
+          <h2 id="loan-list-heading" className="text-lg font-semibold" style={{ color: "var(--aegis-text)" }}>Loans</h2>
+          <p className="mt-1 text-xs" style={{ color: "var(--aegis-muted)" }}>Open positions and account history</p>
         </div>
-        <div className="hw-tabs grid grid-cols-2 gap-1 p-1">
+        <div className="aegis-tabs grid grid-cols-2 gap-1 p-1">
           {(["ACTIVE", "HISTORY"] as const).map((value) => (
             <button
               key={value}
@@ -213,8 +213,8 @@ export function ActiveLoans({
               onClick={() => setTab(value)}
               className="rounded-lg px-3 py-2 text-xs font-semibold"
               style={{
-                background: tab === value ? "var(--hw-indicator)" : "transparent",
-                color: tab === value ? "var(--hw-text)" : "var(--hw-muted)",
+                background: tab === value ? "var(--aegis-indicator)" : "transparent",
+                color: tab === value ? "var(--aegis-text)" : "var(--aegis-muted)",
               }}
               aria-pressed={tab === value}
             >
@@ -229,7 +229,7 @@ export function ActiveLoans({
       {loans.length === 0 ? (
         <EmptyState tab={tab} />
       ) : (
-        <div className="hw-card overflow-hidden">
+        <div className="aegis-card overflow-hidden">
           {loans.map((loan) => (
             <LoanCard
               key={loan.id}
@@ -239,12 +239,12 @@ export function ActiveLoans({
             />
           ))}
           {hasMore ? (
-            <div className="flex justify-center border-t px-5 py-4" style={{ borderColor: "var(--hw-card-border)" }}>
+            <div className="flex justify-center border-t px-5 py-4" style={{ borderColor: "var(--aegis-card-border)" }}>
               <button
                 type="button"
                 onClick={loadMore}
                 disabled={loadingMore !== null}
-                className="hw-btn-outline flex h-9 items-center justify-center gap-2 px-4 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-60"
+                className="aegis-btn-outline flex h-9 items-center justify-center gap-2 px-4 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {loadingMore === tab ? (
                   <><Loader2 className="h-4 w-4 animate-spin" /> Loading</>

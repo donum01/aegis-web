@@ -100,20 +100,20 @@ export function EarnSubscribeForm({
   }
 
   return (
-    <section className="hw-card overflow-hidden" aria-labelledby="subscribe-heading">
-      <div className="hw-panel-header">
+    <section className="aegis-card overflow-hidden" aria-labelledby="subscribe-heading">
+      <div className="aegis-panel-header">
         <div>
-          <h2 id="subscribe-heading" className="text-lg font-semibold" style={{ color: "var(--hw-text)" }}>
+          <h2 id="subscribe-heading" className="text-lg font-semibold" style={{ color: "var(--aegis-text)" }}>
             Start earning
           </h2>
-          <p className="mt-1 text-xs" style={{ color: "var(--hw-muted)" }}>
+          <p className="mt-1 text-xs" style={{ color: "var(--aegis-muted)" }}>
             Configure a position and review the terms before confirming.
           </p>
         </div>
       </div>
 
       {!product ? (
-        <div className="p-6 text-sm" style={{ color: "var(--hw-muted)" }}>
+        <div className="p-6 text-sm" style={{ color: "var(--aegis-muted)" }}>
           No Earn products are currently available.
         </div>
       ) : (
@@ -121,11 +121,11 @@ export function EarnSubscribeForm({
           <div className="flex flex-col gap-5 p-5 sm:p-6">
             {formError ? (
               <div
-                className="hw-fade-slide rounded-lg px-3 py-2.5 text-sm font-medium"
+                className="aegis-fade-slide rounded-lg px-3 py-2.5 text-sm font-medium"
                 style={{
-                  color: "var(--hw-error)",
-                  background: "color-mix(in srgb, var(--hw-error) 8%, transparent)",
-                  border: "1px solid color-mix(in srgb, var(--hw-error) 28%, transparent)",
+                  color: "var(--aegis-error)",
+                  background: "color-mix(in srgb, var(--aegis-error) 8%, transparent)",
+                  border: "1px solid color-mix(in srgb, var(--aegis-error) 28%, transparent)",
                 }}
                 role="alert"
               >
@@ -135,7 +135,7 @@ export function EarnSubscribeForm({
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="flex flex-col gap-1.5">
-                <label htmlFor="earn-asset" className="text-sm font-medium" style={{ color: "var(--hw-text)" }}>
+                <label htmlFor="earn-asset" className="text-sm font-medium" style={{ color: "var(--aegis-text)" }}>
                   Asset
                 </label>
                 <select
@@ -143,14 +143,14 @@ export function EarnSubscribeForm({
                   value={product.asset}
                   onChange={(event) => selectAsset(event.target.value as AssetSymbol)}
                   disabled={reviewing}
-                  className="hw-input h-11 w-full px-3 text-sm font-medium"
+                  className="aegis-input h-11 w-full px-3 text-sm font-medium"
                 >
                   {assets.map((asset) => <option key={asset} value={asset}>{asset}</option>)}
                 </select>
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <label htmlFor="earn-term" className="text-sm font-medium" style={{ color: "var(--hw-text)" }}>
+                <label htmlFor="earn-term" className="text-sm font-medium" style={{ color: "var(--aegis-text)" }}>
                   Term
                 </label>
                 <select
@@ -158,7 +158,7 @@ export function EarnSubscribeForm({
                   value={product.id}
                   onChange={(event) => onSelectProduct(event.target.value)}
                   disabled={reviewing}
-                  className="hw-input h-11 w-full px-3 text-sm font-medium"
+                  className="aegis-input h-11 w-full px-3 text-sm font-medium"
                 >
                   {productsForAsset.map((candidate) => (
                     <option key={candidate.id} value={candidate.id}>
@@ -171,12 +171,12 @@ export function EarnSubscribeForm({
 
             <div className="flex flex-col gap-1.5">
               <div className="flex items-baseline justify-between gap-3">
-                <label htmlFor="earn-amount" className="text-sm font-medium" style={{ color: "var(--hw-text)" }}>
+                <label htmlFor="earn-amount" className="text-sm font-medium" style={{ color: "var(--aegis-text)" }}>
                   Amount
                 </label>
                 <span
                   className="text-xs tabular-nums"
-                  style={{ color: overBalance ? "var(--hw-error)" : "var(--hw-muted)" }}
+                  style={{ color: overBalance ? "var(--aegis-error)" : "var(--aegis-muted)" }}
                 >
                   Available: {assetAmountFormatter.format(available)} {product.asset}
                 </span>
@@ -195,7 +195,7 @@ export function EarnSubscribeForm({
                     setReviewing(false)
                   }}
                   disabled={reviewing}
-                  className={`hw-input h-12 w-full pl-3.5 pr-20 text-sm tabular-nums ${overBalance || belowMinimum ? "hw-input-error" : ""}`}
+                  className={`aegis-input h-12 w-full pl-3.5 pr-20 text-sm tabular-nums ${overBalance || belowMinimum ? "aegis-input-error" : ""}`}
                 />
                 <button
                   type="button"
@@ -205,32 +205,32 @@ export function EarnSubscribeForm({
                   }}
                   disabled={available <= 0 || reviewing}
                   className="absolute right-0 top-1/2 flex h-12 min-w-12 -translate-y-1/2 items-center justify-center rounded-r-lg px-3 text-xs font-bold disabled:cursor-not-allowed disabled:opacity-50"
-                  style={{ color: "var(--hw-primary)", background: "var(--hw-primary-soft)" }}
+                  style={{ color: "var(--aegis-primary)", background: "var(--aegis-primary-soft)" }}
                 >
                   Max
                 </button>
               </div>
               {belowMinimum ? (
-                <p className="text-xs" style={{ color: "var(--hw-error)" }}>
+                <p className="text-xs" style={{ color: "var(--aegis-error)" }}>
                   Minimum is {assetAmountFormatter.format(product.minimumAmount)} {product.asset}.
                 </p>
               ) : null}
               {overBalance ? (
-                <p className="text-xs" style={{ color: "var(--hw-error)" }}>
+                <p className="text-xs" style={{ color: "var(--aegis-error)" }}>
                   This amount exceeds your available balance.
                 </p>
               ) : null}
             </div>
 
-            <div className="flex items-start gap-2 text-xs leading-relaxed" style={{ color: "var(--hw-muted)" }}>
-              <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0" style={{ color: "var(--hw-primary)" }} aria-hidden="true" />
+            <div className="flex items-start gap-2 text-xs leading-relaxed" style={{ color: "var(--aegis-muted)" }}>
+              <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0" style={{ color: "var(--aegis-primary)" }} aria-hidden="true" />
               APY is fixed when the position is created. Rewards use simple daily accrual in this demo ledger.
             </div>
 
             {reviewing ? (
-              <div className="rounded-lg border p-4" style={{ borderColor: "var(--hw-card-border)", background: "var(--hw-primary-soft)" }}>
-                <p className="text-sm font-semibold" style={{ color: "var(--hw-text)" }}>Ready to open this position</p>
-                <p className="mt-1 text-xs leading-relaxed" style={{ color: "var(--hw-muted)" }}>
+              <div className="rounded-lg border p-4" style={{ borderColor: "var(--aegis-card-border)", background: "var(--aegis-primary-soft)" }}>
+                <p className="text-sm font-semibold" style={{ color: "var(--aegis-text)" }}>Ready to open this position</p>
+                <p className="mt-1 text-xs leading-relaxed" style={{ color: "var(--aegis-muted)" }}>
                   Confirm {assetAmountFormatter.format(amountNumber)} {product.asset} at {formatRate(product.apy)} APY for the {earnTermLabel(product.termType).toLowerCase()} term.
                 </p>
               </div>
@@ -238,14 +238,14 @@ export function EarnSubscribeForm({
 
             <div className="flex flex-col-reverse gap-2 sm:flex-row">
               {reviewing ? (
-                <button type="button" onClick={() => setReviewing(false)} disabled={status === "loading"} className="hw-btn-outline h-11 px-5 text-sm font-semibold sm:flex-1">
+                <button type="button" onClick={() => setReviewing(false)} disabled={status === "loading"} className="aegis-btn-outline h-11 px-5 text-sm font-semibold sm:flex-1">
                   Back
                 </button>
               ) : null}
               <button
                 type="submit"
                 disabled={!valid}
-                className="hw-submit flex h-11 items-center justify-center gap-2 text-sm font-semibold sm:flex-1 sm:px-6"
+                className="aegis-submit flex h-11 items-center justify-center gap-2 text-sm font-semibold sm:flex-1 sm:px-6"
               >
                 {status === "loading" ? (
                   <><Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> Confirming</>
@@ -260,43 +260,43 @@ export function EarnSubscribeForm({
 
           <aside
             className="border-t p-5 sm:p-6 lg:border-l lg:border-t-0"
-            style={{ borderColor: "var(--hw-card-border)", background: "var(--hw-track)" }}
+            style={{ borderColor: "var(--aegis-card-border)", background: "var(--aegis-track)" }}
             aria-label="Earn position preview"
           >
-            <p className="hw-eyebrow">Position preview</p>
+            <p className="aegis-eyebrow">Position preview</p>
             <div className="mt-4 flex items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <AssetChip asset={product.asset} size={40} />
                 <div>
-                  <p className="text-sm font-semibold" style={{ color: "var(--hw-text)" }}>{product.asset} Earn</p>
-                  <p className="text-xs" style={{ color: "var(--hw-muted)" }}>{earnTermLabel(product.termType)}</p>
+                  <p className="text-sm font-semibold" style={{ color: "var(--aegis-text)" }}>{product.asset} Earn</p>
+                  <p className="text-xs" style={{ color: "var(--aegis-muted)" }}>{earnTermLabel(product.termType)}</p>
                 </div>
               </div>
               <div className="text-right">
-                <p className="text-2xl font-semibold tabular-nums" style={{ color: "var(--hw-primary)" }}>
+                <p className="text-2xl font-semibold tabular-nums" style={{ color: "var(--aegis-primary)" }}>
                   {formatRate(product.apy)}
                 </p>
-                <p className="text-[11px] font-medium" style={{ color: "var(--hw-muted)" }}>APY</p>
+                <p className="text-[11px] font-medium" style={{ color: "var(--aegis-muted)" }}>APY</p>
               </div>
             </div>
 
             <dl className="mt-6 flex flex-col gap-3 text-sm">
               <div className="flex items-center justify-between gap-4">
-                <dt style={{ color: "var(--hw-muted)" }}>Minimum</dt>
+                <dt style={{ color: "var(--aegis-muted)" }}>Minimum</dt>
                 <dd className="font-semibold tabular-nums">
                   {assetAmountFormatter.format(product.minimumAmount)} {product.asset}
                 </dd>
               </div>
               <div className="flex items-center justify-between gap-4">
-                <dt style={{ color: "var(--hw-muted)" }}>
+                <dt style={{ color: "var(--aegis-muted)" }}>
                   {product.flexible ? "Estimated annual reward" : "Estimated maturity reward"}
                 </dt>
-                <dd className="font-semibold tabular-nums" style={{ color: "var(--hw-ltv-safe)" }}>
+                <dd className="font-semibold tabular-nums" style={{ color: "var(--aegis-ltv-safe)" }}>
                   +{assetAmountFormatter.format(estimatedRewards)} {product.asset}
                 </dd>
               </div>
               <div className="flex items-center justify-between gap-4">
-                <dt className="flex items-center gap-1.5" style={{ color: "var(--hw-muted)" }}>
+                <dt className="flex items-center gap-1.5" style={{ color: "var(--aegis-muted)" }}>
                   <CalendarDays className="h-3.5 w-3.5" aria-hidden="true" />
                   {maturity ? "Maturity" : "Withdrawal"}
                 </dt>
@@ -306,9 +306,9 @@ export function EarnSubscribeForm({
             {maturity ? (
               <div
                 className="mt-5 flex items-start gap-2 rounded-lg border p-3 text-xs leading-relaxed"
-                style={{ borderColor: "var(--hw-card-border)", background: "var(--hw-input-bg)", color: "var(--hw-text)" }}
+                style={{ borderColor: "var(--aegis-card-border)", background: "var(--aegis-input-bg)", color: "var(--aegis-text)" }}
               >
-                <LockKeyhole className="mt-0.5 h-4 w-4 shrink-0" style={{ color: "var(--hw-ltv-warn)" }} aria-hidden="true" />
+                <LockKeyhole className="mt-0.5 h-4 w-4 shrink-0" style={{ color: "var(--aegis-ltv-warn)" }} aria-hidden="true" />
                 <p>
                   <span className="font-semibold">Funds locked until {formatEarnDate(maturity)}.</span>{" "}
                   Early withdrawal is unavailable for this fixed-term position.

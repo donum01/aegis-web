@@ -1,5 +1,5 @@
 /* ===========================================================================
-   HASHWHALE — BORROW DATA LAYER
+   AEGIS DIGITAL — BORROW DATA LAYER
    All mock data lives here in one clearly separated block. Each export is
    shaped to mirror a likely API response, so swapping in real endpoints later
    is a matter of replacing these consts with `fetch` calls that return the
@@ -88,7 +88,7 @@ export function ltvTier(ltv: number, configuration: BorrowConfiguration): LtvTie
 
 /** CSS variable for a given tier, resolves per active light/dark theme. */
 export function ltvTierColorVar(tier: LtvTier): string {
-  return tier === "danger" ? "var(--hw-ltv-danger)" : tier === "warn" ? "var(--hw-ltv-warn)" : "var(--hw-ltv-safe)"
+  return tier === "danger" ? "var(--aegis-ltv-danger)" : tier === "warn" ? "var(--aegis-ltv-warn)" : "var(--aegis-ltv-safe)"
 }
 
 export const loanDateTimeFormatter = new Intl.DateTimeFormat("en-US", {

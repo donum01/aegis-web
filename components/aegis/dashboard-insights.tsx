@@ -1,0 +1,190 @@
+import Link from "next/link"
+import { AlertCircle, ArrowRight, CalendarClock, CheckCircle2, CircleAlert, Info, ShieldCheck, Sparkles, WalletCards } from "lucide-react"
+import { formatRate, usdValueFormatter } from "@/lib/format"
+import { formatEarnDate } from "@/lib/earn"
+import type { AlertSeverity, BorrowHealth, DashboardSummary } from "@/lib/dashboard"
+
+function severityStyle(severity: AlertSeverity) {
+  if (severity === "CRITICAL") return { color: "var(--aegis-error)", background: "color-mix(in srgb, var(--aegis-error) 10%, transparent)", icon: CircleAlert }
+  if (severity === "WARNING") return { color: "var(--aegis-ltv-warn)", background: "rgba(224, 145, 43, 0.10)", icon: AlertCircle }
+  return { color: "var(--aegis-primary)", background: "var(--aegis-primary-soft)", icon: Info }
+}
+
+function healthLabel(health: BorrowHealth) {
+  if (health === "NONE") return "No active loans"
+  if (health === "HEALTHY") return "Healthy"
+  if (health === "WARNING") return "Watch closely"
+  return "At risk"
+}
+
+function healthColor(health: BorrowHealth) {
+  if (health === "HEALTHY") return "var(--aegis-ltv-safe)"
+  if (health === "WARNING") return "var(--aegis-ltv-warn)"
+  if (health === "AT_RISK") return "var(--aegis-error)"
+  return "var(--aegis-muted)"
+}
+
+export function ActionCenter({ summary }: { summary: DashboardSummary }) {
+  return (
+    <section className="aegis-card p-5 sm:p-6" aria-labelledby="action-center-heading">
+      <div className="mb-4 flex items-center justify-between">
+        <div>
+          <h2 id="action-center-heading" className="text-lg font-semibold" style={{ color: "var(--aegis-text)" }}>Action center</h2>
+          <p className="mt-1 text-xs" style={{ color: "var(--aegis-muted)" }}>Only items that may need your attention.</p>
+        </div>
+        <span className="rounded-full px-2.5 py-1 text-xs font-bold" style={{ color: summary.alerts.length ? "var(--aegis-ltv-warn)" : "var(--aegis-ltv-safe)", background: "var(--aegis-track)" }}>
+          {summary.alerts.length} {summary.alerts.length === 1 ? "notice" : "notices"}
+        </span>
+      </div>
+
+      {summary.alerts.length === 0 ? (
+        <div className="flex items-center gap-3 rounded-xl p-4" style={{ background: "var(--aegis-track)" }}>
+          <CheckCircle2 className="h-5 w-5" style={{ color: "var(--aegis-ltv-safe)" }} />
+          <div>
+            <p className="text-sm font-semibold" style={{ color: "var(--aegis-text)" }}>Nothing needs attention</p>
+            <p className="mt-0.5 text-xs" style={{ color: "var(--aegis-muted)" }}>Your simulated products are currently in a normal state.</p>
+          </div>
+        </div>
+      ) : (
+        <div className="flex flex-col gap-3">
+          {summary.alerts.map((alert, index) => {
+            const style = severityStyle(alert.severity)
+            const Icon = style.icon
+            const isKycNotice = /kyc|identity verification/i.test(`${alert.title} ${alert.message}`)
+            return (
+              <article key={`${alert.title}-${index}`} className="aegis-card-in flex items-start gap-3 rounded-xl p-4" style={{ background: style.background, animationDelay: `${index * 45}ms` }}>
+                <Icon className="mt-0.5 h-5 w-5 shrink-0" style={{ color: style.color }} aria-hidden="true" />
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm font-bold" style={{ color: "var(--aegis-text)" }}>{alert.title}</p>
+                  <p className="mt-1 text-xs leading-relaxed" style={{ color: "var(--aegis-muted)" }}>
+                    {alert.message}
+                  </p>
+                </div>
+                {alert.href && alert.actionLabel ? (
+                  <Link href={alert.href} className="shrink-0 text-xs font-bold hover:underline" style={{ color: style.color }}>
+                    {alert.actionLabel}
+                  </Link>
+                ) : isKycNotice ? (
+                  <span className="shrink-0 rounded-full px-2 py-1 text-[11px] font-semibold" style={{ color: "var(--aegis-muted)", background: "var(--aegis-card)" }}>
+                    Unavailable in demo
+                  </span>
+                ) : null}
+              </article>
+            )
+          })}
+        </div>
+      )}
+    </section>
+  )
+}
+
+export function CapitalAllocation({ summary }: { summary: DashboardSummary }) {
+  const items = [
+    { label: "Available", value: summary.availableUsd, color: "var(--aegis-primary)" },
+    { label: "In Earn", value: summary.earnPrincipalUsd, color: "var(--aegis-ltv-safe)" },
+    { label: "Loan collateral", value: summary.collateralUsd, color: "var(--aegis-accent)" },
+  ]
+  const total = items.reduce((sum, item) => sum + item.value, 0)
+  const availableEnd = total ? (items[0].value / total) * 100 : 0
+  const earnEnd = total ? availableEnd + (items[1].value / total) * 100 : 0
+  const donut = total
+    ? `conic-gradient(${items[0].color} 0 ${availableEnd}%, ${items[1].color} ${availableEnd}% ${earnEnd}%, ${items[2].color} ${earnEnd}% 100%)`
+    : "var(--aegis-track)"
+
+  return (
+    <section className="aegis-card p-5 sm:p-6" aria-labelledby="allocation-heading">
+      <h2 id="allocation-heading" className="text-lg font-semibold" style={{ color: "var(--aegis-text)" }}>Capital allocation</h2>
+      <p className="mt-1 text-xs" style={{ color: "var(--aegis-muted)" }}>How your assets are currently being used.</p>
+      <div className="mt-6 flex flex-col items-center gap-6 sm:flex-row">
+        <div className="relative h-36 w-36 shrink-0 rounded-full" style={{ background: donut }} role="img" aria-label="Capital allocation chart">
+          <div className="absolute inset-[18px] flex flex-col items-center justify-center rounded-full text-center" style={{ background: "var(--aegis-card)" }}>
+            <span className="text-xs" style={{ color: "var(--aegis-muted)" }}>Allocated</span>
+            <strong className="mt-0.5 text-sm tabular-nums" style={{ color: "var(--aegis-text)" }}>{usdValueFormatter.format(total)}</strong>
+          </div>
+        </div>
+        <div className="w-full space-y-3">
+          {items.map((item) => (
+            <div key={item.label} className="flex items-center justify-between gap-4 text-sm">
+              <span className="flex items-center gap-2" style={{ color: "var(--aegis-muted)" }}>
+                <span className="h-2.5 w-2.5 rounded-full" style={{ background: item.color }} /> {item.label}
+              </span>
+              <span className="font-bold tabular-nums" style={{ color: "var(--aegis-text)" }}>
+                {usdValueFormatter.format(item.value)}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export function ProductHealth({ summary }: { summary: DashboardSummary }) {
+  return (
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <Link href="/borrow" className="aegis-card-hover aegis-card block p-5" aria-label="View Borrow health">
+        <div className="flex items-start justify-between">
+          <span className="flex h-10 w-10 items-center justify-center rounded-xl" style={{ background: "var(--aegis-track)", color: "var(--aegis-primary)" }}>
+            <ShieldCheck className="h-5 w-5" />
+          </span>
+          <span className="rounded-full px-2.5 py-1 text-xs font-bold" style={{ color: healthColor(summary.borrowHealth), background: "var(--aegis-track)" }}>
+            {healthLabel(summary.borrowHealth)}
+          </span>
+        </div>
+        <p className="mt-5 text-sm font-semibold" style={{ color: "var(--aegis-muted)" }}>Borrow health</p>
+        <div className="mt-1 flex items-end justify-between gap-3">
+          <div>
+            <p className="text-2xl font-bold tabular-nums" style={{ color: "var(--aegis-text)" }}>{summary.activeLoanCount}</p>
+            <p className="text-xs" style={{ color: "var(--aegis-muted)" }}>{summary.activeLoanCount === 1 ? "active loan" : "active loans"}</p>
+          </div>
+          <div className="text-right">
+            <p className="text-lg font-bold tabular-nums" style={{ color: healthColor(summary.borrowHealth) }}>{summary.highestLtvPercent.toFixed(2)}%</p>
+            <p className="text-xs" style={{ color: "var(--aegis-muted)" }}>highest LTV</p>
+          </div>
+        </div>
+      </Link>
+
+      <Link href="/earn" className="aegis-card-hover aegis-card block p-5" aria-label="View Earn performance">
+        <div className="flex items-start justify-between">
+          <span className="flex h-10 w-10 items-center justify-center rounded-xl" style={{ background: "var(--aegis-primary-soft)", color: "var(--aegis-primary)" }}>
+            <Sparkles className="h-5 w-5" />
+          </span>
+          {summary.nextEarnMaturityDate ? (
+            <span className="flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold" style={{ color: "var(--aegis-primary)", background: "var(--aegis-primary-soft)" }}>
+              <CalendarClock className="h-3 w-3" /> {formatEarnDate(summary.nextEarnMaturityDate)}
+            </span>
+          ) : null}
+        </div>
+        <p className="mt-5 text-sm font-semibold" style={{ color: "var(--aegis-muted)" }}>Earn performance</p>
+        <div className="mt-1 flex items-end justify-between gap-3">
+          <div>
+            <p className="text-2xl font-bold tabular-nums" style={{ color: "var(--aegis-text)" }}>{summary.activeEarnPositionCount}</p>
+            <p className="text-xs" style={{ color: "var(--aegis-muted)" }}>active positions</p>
+          </div>
+          <div className="text-right">
+            <p className="text-lg font-bold tabular-nums" style={{ color: "var(--aegis-ltv-safe)" }}>{formatRate(summary.weightedAverageEarnApy)}</p>
+            <p className="text-xs" style={{ color: "var(--aegis-muted)" }}>weighted APY</p>
+          </div>
+        </div>
+      </Link>
+    </div>
+  )
+}
+
+export function RecommendedAction({ summary }: { summary: DashboardSummary }) {
+  return (
+    <section className="aegis-card relative overflow-hidden p-5 sm:p-6" aria-labelledby="recommendation-heading" style={{ borderColor: "var(--aegis-primary)" }}>
+      <div className="relative">
+        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wide" style={{ color: "var(--aegis-primary)" }}>
+          <WalletCards className="h-4 w-4" /> Next action
+        </div>
+        <h2 id="recommendation-heading" className="mt-4 text-xl font-bold" style={{ color: "var(--aegis-text)" }}>{summary.recommendation.title}</h2>
+        <p className="mt-2 max-w-2xl text-sm leading-relaxed" style={{ color: "var(--aegis-muted)" }}>{summary.recommendation.message}</p>
+        <Link href={summary.recommendation.href} className="aegis-submit mt-5 inline-flex h-10 items-center gap-2 px-4 text-sm font-bold">
+          {summary.recommendation.actionLabel} <ArrowRight className="h-4 w-4" />
+        </Link>
+        <p className="mt-3 text-[11px]" style={{ color: "var(--aegis-muted)" }}>Rule-based simulation prompt—not financial advice.</p>
+      </div>
+    </section>
+  )
+}

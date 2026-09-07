@@ -134,7 +134,7 @@ export function MarketPriceChart() {
   const currency = history ? fiatFormatter(history.quoteCurrency) : null
   const selectedPoint = hoveredIndex != null && geometry ? geometry.coordinates[hoveredIndex] : null
   const positive = (history?.changePercent ?? 0) >= 0
-  const changeColor = positive ? "var(--hw-ltv-safe)" : "var(--hw-error)"
+  const changeColor = positive ? "var(--aegis-ltv-safe)" : "var(--aegis-error)"
   const chartColor = ASSETS[asset].color
   const zoomedScale = Boolean(history && geometry && geometry.spread / history.currentPrice < 0.01)
 
@@ -164,22 +164,22 @@ export function MarketPriceChart() {
   }
 
   return (
-    <section className="hw-card overflow-hidden p-5 sm:p-6" aria-labelledby="market-chart-heading">
+    <section className="aegis-card overflow-hidden p-5 sm:p-6" aria-labelledby="market-chart-heading">
       <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
         <div>
           <div className="flex items-center gap-2">
-            <h2 id="market-chart-heading" className="text-xl font-bold" style={{ color: "var(--hw-text)" }}>
+            <h2 id="market-chart-heading" className="text-xl font-bold" style={{ color: "var(--aegis-text)" }}>
               Price history
             </h2>
-            {refreshing ? <Loader2 className="h-3.5 w-3.5 animate-spin" style={{ color: "var(--hw-primary)" }} /> : null}
+            {refreshing ? <Loader2 className="h-3.5 w-3.5 animate-spin" style={{ color: "var(--aegis-primary)" }} /> : null}
           </div>
-          <p className="mt-1 text-sm" style={{ color: "var(--hw-muted)" }}>
+          <p className="mt-1 text-sm" style={{ color: "var(--aegis-muted)" }}>
             Stored market prices collected automatically in the background.
           </p>
         </div>
 
         <div className="flex flex-col gap-2 sm:flex-row">
-          <div className="hw-tabs flex gap-1 overflow-x-auto p-1" aria-label="Select market asset">
+          <div className="aegis-tabs flex gap-1 overflow-x-auto p-1" aria-label="Select market asset">
             {ASSET_OPTIONS.map((option) => (
               <button
                 key={option}
@@ -187,8 +187,8 @@ export function MarketPriceChart() {
                 onClick={() => setAsset(option)}
                 className="flex min-w-20 items-center justify-center gap-2 rounded-lg px-3 py-2 text-xs font-bold transition-colors"
                 style={{
-                  background: asset === option ? "var(--hw-indicator)" : "transparent",
-                  color: asset === option ? "var(--hw-text)" : "var(--hw-muted)",
+                  background: asset === option ? "var(--aegis-indicator)" : "transparent",
+                  color: asset === option ? "var(--aegis-text)" : "var(--aegis-muted)",
                 }}
                 aria-pressed={asset === option}
               >
@@ -196,7 +196,7 @@ export function MarketPriceChart() {
               </button>
             ))}
           </div>
-          <div className="hw-tabs grid grid-cols-4 gap-1 p-1" aria-label="Select chart period">
+          <div className="aegis-tabs grid grid-cols-4 gap-1 p-1" aria-label="Select chart period">
             {RANGE_OPTIONS.map((option) => (
               <button
                 key={option}
@@ -204,8 +204,8 @@ export function MarketPriceChart() {
                 onClick={() => setRange(option)}
                 className="rounded-lg px-3 py-2 text-xs font-bold transition-colors"
                 style={{
-                  background: range === option ? "var(--hw-indicator)" : "transparent",
-                  color: range === option ? "var(--hw-text)" : "var(--hw-muted)",
+                  background: range === option ? "var(--aegis-indicator)" : "transparent",
+                  color: range === option ? "var(--aegis-text)" : "var(--aegis-muted)",
                 }}
                 aria-pressed={range === option}
               >
@@ -218,14 +218,14 @@ export function MarketPriceChart() {
 
       {loading ? (
         <div className="mt-6 animate-pulse">
-          <div className="h-9 w-44 rounded-lg" style={{ background: "var(--hw-track)" }} />
-          <div className="mt-6 h-[300px] rounded-xl" style={{ background: "var(--hw-track)" }} />
+          <div className="h-9 w-44 rounded-lg" style={{ background: "var(--aegis-track)" }} />
+          <div className="mt-6 h-[300px] rounded-xl" style={{ background: "var(--aegis-track)" }} />
         </div>
       ) : !history || !geometry || !currency ? (
-        <div className="mt-6 flex min-h-[330px] flex-col items-center justify-center gap-3 rounded-xl text-center" style={{ background: "var(--hw-track)" }}>
-          <AlertTriangle className="h-7 w-7" style={{ color: "var(--hw-ltv-warn)" }} />
-          <p className="text-sm font-semibold" style={{ color: "var(--hw-text)" }}>{error ?? "No market history available."}</p>
-          <button type="button" onClick={() => void loadHistory()} className="hw-btn-outline px-4 py-2 text-xs font-bold">
+        <div className="mt-6 flex min-h-[330px] flex-col items-center justify-center gap-3 rounded-xl text-center" style={{ background: "var(--aegis-track)" }}>
+          <AlertTriangle className="h-7 w-7" style={{ color: "var(--aegis-ltv-warn)" }} />
+          <p className="text-sm font-semibold" style={{ color: "var(--aegis-text)" }}>{error ?? "No market history available."}</p>
+          <button type="button" onClick={() => void loadHistory()} className="aegis-btn-outline px-4 py-2 text-xs font-bold">
             Try again
           </button>
         </div>
@@ -236,17 +236,17 @@ export function MarketPriceChart() {
               <AssetChip asset={asset} size={42} />
               <div>
                 <div className="flex items-center gap-2">
-                  <p className="text-3xl font-bold tabular-nums tracking-tight" style={{ color: "var(--hw-text)" }}>
+                  <p className="text-3xl font-bold tabular-nums tracking-tight" style={{ color: "var(--aegis-text)" }}>
                     {currency.format(history.currentPrice)}
                   </p>
-                  <span className="text-xs font-semibold" style={{ color: "var(--hw-muted)" }}>
+                  <span className="text-xs font-semibold" style={{ color: "var(--aegis-muted)" }}>
                     {asset}/{history.quoteCurrency}
                   </span>
                 </div>
                 <p className="mt-1 flex items-center gap-1 text-sm font-bold tabular-nums" style={{ color: changeColor }}>
                   {positive ? <ArrowUpRight className="h-4 w-4" /> : <ArrowDownRight className="h-4 w-4" />}
                   {positive ? "+" : ""}{history.changePercent.toFixed(2)}% · {positive ? "+" : ""}{currency.format(history.changeAmount)}
-                  <span className="ml-1 font-normal" style={{ color: "var(--hw-muted)" }}>over {range}</span>
+                  <span className="ml-1 font-normal" style={{ color: "var(--aegis-muted)" }}>over {range}</span>
                 </p>
               </div>
             </div>
@@ -254,8 +254,8 @@ export function MarketPriceChart() {
               <span
                 className="flex items-center gap-1.5 rounded-full px-2.5 py-1.5 font-semibold"
                 style={{
-                  color: history.source === "COINGECKO" && !history.stale ? "var(--hw-ltv-safe)" : "var(--hw-ltv-warn)",
-                  background: "var(--hw-track)",
+                  color: history.source === "COINGECKO" && !history.stale ? "var(--aegis-ltv-safe)" : "var(--aegis-ltv-warn)",
+                  background: "var(--aegis-track)",
                 }}
               >
                 <Radio className="h-3 w-3" />
@@ -266,7 +266,7 @@ export function MarketPriceChart() {
                     : "Configured price"}
               </span>
               {history.updatedAt ? (
-                <span style={{ color: "var(--hw-muted)" }}>
+                <span style={{ color: "var(--aegis-muted)" }}>
                   Updated {new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2-digit", second: "2-digit" }).format(new Date(history.updatedAt))}
                 </span>
               ) : null}
@@ -274,7 +274,7 @@ export function MarketPriceChart() {
           </div>
 
           {error ? (
-            <p className="mt-3 text-xs" style={{ color: "var(--hw-ltv-warn)" }} role="status">
+            <p className="mt-3 text-xs" style={{ color: "var(--aegis-ltv-warn)" }} role="status">
               {error} Showing the last available series.
             </p>
           ) : null}
@@ -283,10 +283,10 @@ export function MarketPriceChart() {
             {selectedPoint ? (
               <div
                 className="pointer-events-none absolute left-3 top-2 z-10 rounded-lg px-3 py-2 text-xs shadow-lg sm:left-auto sm:right-3"
-                style={{ background: "var(--hw-indicator)", color: "var(--hw-text)", border: "1px solid var(--hw-input-border)" }}
+                style={{ background: "var(--aegis-indicator)", color: "var(--aegis-text)", border: "1px solid var(--aegis-input-border)" }}
               >
                 <p className="font-bold tabular-nums">{currency.format(selectedPoint.point.price)}</p>
-                <p className="mt-0.5" style={{ color: "var(--hw-muted)" }}>{formatTimestamp(selectedPoint.point.timestamp)}</p>
+                <p className="mt-0.5" style={{ color: "var(--aegis-muted)" }}>{formatTimestamp(selectedPoint.point.timestamp)}</p>
               </div>
             ) : null}
 
@@ -310,25 +310,25 @@ export function MarketPriceChart() {
                 const value = geometry.maximum - ratio * (geometry.maximum - geometry.minimum)
                 return (
                   <g key={ratio}>
-                    <line x1={PADDING.left} x2={CHART_WIDTH - PADDING.right} y1={y} y2={y} stroke="var(--hw-input-border)" strokeDasharray="4 6" />
-                    <text x={CHART_WIDTH - PADDING.right + 9} y={y + 4} fill="var(--hw-muted)" fontSize="10">
+                    <line x1={PADDING.left} x2={CHART_WIDTH - PADDING.right} y1={y} y2={y} stroke="var(--aegis-input-border)" strokeDasharray="4 6" />
+                    <text x={CHART_WIDTH - PADDING.right + 9} y={y + 4} fill="var(--aegis-muted)" fontSize="10">
                       {fiatFormatter(history.quoteCurrency, true).format(value)}
                     </text>
                   </g>
                 )
               })}
               <path d={geometry.areaPath} fill={`url(#market-area-${asset})`} />
-              <path className="hw-chart-line" pathLength={1} d={geometry.linePath} fill="none" stroke={chartColor} strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round" />
+              <path className="aegis-chart-line" pathLength={1} d={geometry.linePath} fill="none" stroke={chartColor} strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round" />
               {selectedPoint ? (
                 <g>
-                  <line x1={selectedPoint.x} x2={selectedPoint.x} y1={PADDING.top} y2={CHART_HEIGHT - PADDING.bottom} stroke="var(--hw-muted)" strokeDasharray="3 4" />
-                  <circle cx={selectedPoint.x} cy={selectedPoint.y} r="5" fill="var(--hw-card)" stroke={chartColor} strokeWidth="3" />
+                  <line x1={selectedPoint.x} x2={selectedPoint.x} y1={PADDING.top} y2={CHART_HEIGHT - PADDING.bottom} stroke="var(--aegis-muted)" strokeDasharray="3 4" />
+                  <circle cx={selectedPoint.x} cy={selectedPoint.y} r="5" fill="var(--aegis-card)" stroke={chartColor} strokeWidth="3" />
                 </g>
               ) : null}
               {[0, Math.floor((history.points.length - 1) / 2), history.points.length - 1].map((index) => {
                 const coordinate = geometry.coordinates[index]
                 return (
-                  <text key={index} x={coordinate.x} y={CHART_HEIGHT - 6} textAnchor={index === 0 ? "start" : index === history.points.length - 1 ? "end" : "middle"} fill="var(--hw-muted)" fontSize="10">
+                  <text key={index} x={coordinate.x} y={CHART_HEIGHT - 6} textAnchor={index === 0 ? "start" : index === history.points.length - 1 ? "end" : "middle"} fill="var(--aegis-muted)" fontSize="10">
                     {formatTimestamp(coordinate.point.timestamp)}
                   </text>
                 )
@@ -336,10 +336,10 @@ export function MarketPriceChart() {
             </svg>
           </div>
 
-          <div className="flex flex-wrap items-center justify-between gap-3 border-t pt-4 text-xs" style={{ borderColor: "var(--hw-input-border)", color: "var(--hw-muted)" }}>
-            <span>Low <strong style={{ color: "var(--hw-text)" }}>{currency.format(history.minimumPrice)}</strong></span>
+          <div className="flex flex-wrap items-center justify-between gap-3 border-t pt-4 text-xs" style={{ borderColor: "var(--aegis-input-border)", color: "var(--aegis-muted)" }}>
+            <span>Low <strong style={{ color: "var(--aegis-text)" }}>{currency.format(history.minimumPrice)}</strong></span>
             {asset === "USDT" ? <span>Local quote defaults to your signup country</span> : null}
-            <span>High <strong style={{ color: "var(--hw-text)" }}>{currency.format(history.maximumPrice)}</strong></span>
+            <span>High <strong style={{ color: "var(--aegis-text)" }}>{currency.format(history.maximumPrice)}</strong></span>
             {zoomedScale ? <span className="w-full text-center">Zoomed vertical scale highlights small price movements.</span> : null}
           </div>
         </div>

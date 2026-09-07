@@ -15,10 +15,10 @@ export function AppShell({
 }) {
   return (
     <main
-      className={`hw ${theme === "dark" ? "hw-dark" : "hw-light"} min-h-svh transition-colors duration-200`}
-      style={{ background: "var(--hw-bg)", color: "var(--hw-text)" }}
+      className={`aegis ${theme === "dark" ? "aegis-dark" : "aegis-light"} min-h-svh transition-colors duration-200`}
+      style={{ background: "var(--aegis-bg)", color: "var(--aegis-text)" }}
     >
-      <div className="hw-page-shell">
+      <div className="aegis-page-shell">
         <header className="sticky top-3 z-40 mb-8 sm:mb-10">
           <Nav theme={theme} onToggleTheme={onToggleTheme} />
         </header>

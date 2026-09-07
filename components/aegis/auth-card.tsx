@@ -178,7 +178,7 @@ export function AuthCard() {
   }, [status, mode])
 
   return (
-    <div className="hw-card-in hw-card relative z-10 w-full max-w-[420px] p-6 sm:p-8">
+    <div className="aegis-card-in aegis-card relative z-10 w-full max-w-[420px] p-6 sm:p-8">
       {/* Logo */}
       <div className="mb-6 flex justify-center">
         <Wordmark />
@@ -187,15 +187,15 @@ export function AuthCard() {
         <h2 className="text-xl font-semibold tracking-tight">
           {mode === "login" ? "Welcome back" : "Create your account"}
         </h2>
-        <p className="mt-1.5 text-sm" style={{ color: "var(--hw-muted)" }}>
-          {mode === "login" ? "Sign in to continue to your portfolio." : "Set up a HashWhale demo account."}
+        <p className="mt-1.5 text-sm" style={{ color: "var(--aegis-muted)" }}>
+          {mode === "login" ? "Sign in to continue to your portfolio." : "Set up an Aegis Digital demo account."}
         </p>
       </div>
 
       {/* Tab switcher */}
-      <div className="hw-tabs relative mb-6 grid grid-cols-2 p-1" role="tablist" aria-label="Authentication mode">
+      <div className="aegis-tabs relative mb-6 grid grid-cols-2 p-1" role="tablist" aria-label="Authentication mode">
         <span
-          className="hw-tab-indicator absolute inset-y-1 w-[calc(50%-4px)]"
+          className="aegis-tab-indicator absolute inset-y-1 w-[calc(50%-4px)]"
           style={{ transform: mode === "login" ? "translateX(4px)" : "translateX(calc(100% + 4px))" }}
           aria-hidden="true"
         />
@@ -205,7 +205,7 @@ export function AuthCard() {
           role="tab"
           onClick={() => switchMode("login")}
           className="relative z-10 h-11 rounded-lg px-3 text-sm font-semibold transition-colors duration-200"
-          style={{ color: mode === "login" ? "var(--hw-text)" : "var(--hw-muted)" }}
+          style={{ color: mode === "login" ? "var(--aegis-text)" : "var(--aegis-muted)" }}
           aria-selected={mode === "login"}
         >
           Log In
@@ -215,7 +215,7 @@ export function AuthCard() {
           role="tab"
           onClick={() => switchMode("signup")}
           className="relative z-10 h-11 rounded-lg px-3 text-sm font-semibold transition-colors duration-200"
-          style={{ color: mode === "signup" ? "var(--hw-text)" : "var(--hw-muted)" }}
+          style={{ color: mode === "signup" ? "var(--aegis-text)" : "var(--aegis-muted)" }}
           aria-selected={mode === "signup"}
         >
           Sign Up
@@ -225,11 +225,11 @@ export function AuthCard() {
       {/* Success message (e.g. after signup) */}
       {successMessage ? (
         <div
-          className="hw-fade-slide mb-4 rounded-lg px-3 py-2.5 text-sm font-medium"
+          className="aegis-fade-slide mb-4 rounded-lg px-3 py-2.5 text-sm font-medium"
           style={{
-            color: "var(--hw-primary)",
-            background: "var(--hw-primary-soft)",
-            border: "1px solid rgba(13, 83, 255, 0.3)",
+            color: "var(--aegis-primary)",
+            background: "var(--aegis-primary-soft)",
+            border: "1px solid color-mix(in srgb, var(--aegis-primary) 30%, transparent)",
           }}
           role="status"
         >
@@ -239,11 +239,11 @@ export function AuthCard() {
 
       {authNotice ? (
         <div
-          className="hw-fade-slide mb-4 rounded-lg px-3 py-2.5 text-sm font-medium"
+          className="aegis-fade-slide mb-4 rounded-lg px-3 py-2.5 text-sm font-medium"
           style={{
-            color: "var(--hw-error)",
-            background: "rgba(255, 100, 13, 0.1)",
-            border: "1px solid rgba(255, 100, 13, 0.3)",
+            color: "var(--aegis-error)",
+            background: "color-mix(in srgb, var(--aegis-error) 10%, transparent)",
+            border: "1px solid color-mix(in srgb, var(--aegis-error) 30%, transparent)",
           }}
           role="alert"
         >
@@ -254,11 +254,11 @@ export function AuthCard() {
       {/* Form-level error */}
       {errors.form ? (
         <div
-          className="hw-fade-slide mb-4 rounded-lg px-3 py-2.5 text-sm font-medium"
+          className="aegis-fade-slide mb-4 rounded-lg px-3 py-2.5 text-sm font-medium"
           style={{
-            color: "var(--hw-error)",
-            background: "rgba(255, 100, 13, 0.1)",
-            border: "1px solid rgba(255, 100, 13, 0.3)",
+            color: "var(--aegis-error)",
+            background: "color-mix(in srgb, var(--aegis-error) 10%, transparent)",
+            border: "1px solid color-mix(in srgb, var(--aegis-error) 30%, transparent)",
           }}
           role="alert"
         >
@@ -267,7 +267,7 @@ export function AuthCard() {
       ) : null}
 
       <form onSubmit={onSubmit} noValidate className="flex flex-col gap-4">
-        <div key={mode} className="hw-fade-slide flex flex-col gap-4">
+        <div key={mode} className="aegis-fade-slide flex flex-col gap-4">
           <Field id="email" label="Email" error={errors.email}>
             <input
               id="email"
@@ -278,7 +278,7 @@ export function AuthCard() {
               onChange={(e) => setEmail(e.target.value)}
               aria-invalid={Boolean(errors.email)}
               aria-describedby={errors.email ? "email-error" : undefined}
-              className={`hw-input h-11 w-full px-3.5 text-sm ${errors.email ? "hw-input-error" : ""}`}
+              className={`aegis-input h-11 w-full px-3.5 text-sm ${errors.email ? "aegis-input-error" : ""}`}
             />
           </Field>
 
@@ -292,14 +292,14 @@ export function AuthCard() {
               onChange={(e) => setPassword(e.target.value)}
               aria-invalid={Boolean(errors.password)}
               aria-describedby={errors.password ? "password-error" : undefined}
-              className={`hw-input h-11 w-full pl-3.5 pr-11 text-sm ${errors.password ? "hw-input-error" : ""}`}
+              className={`aegis-input h-11 w-full pl-3.5 pr-11 text-sm ${errors.password ? "aegis-input-error" : ""}`}
             />
             <button
               type="button"
               onClick={() => setShowPassword((s) => !s)}
               aria-label={showPassword ? "Hide password" : "Show password"}
               className="absolute right-0 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-md transition-colors"
-              style={{ color: "var(--hw-muted)" }}
+              style={{ color: "var(--aegis-muted)" }}
             >
               {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
             </button>
@@ -308,7 +308,7 @@ export function AuthCard() {
 
         {/* Sign-up-only fields — expand/slide in smoothly */}
         {mode === "signup" ? (
-        <div className="hw-fade-slide">
+        <div className="aegis-fade-slide">
           <div className="flex flex-col gap-4 pt-0.5">
             <Field id="confirmPassword" label="Confirm password" error={errors.confirmPassword}>
               <input
@@ -320,7 +320,7 @@ export function AuthCard() {
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 aria-invalid={Boolean(errors.confirmPassword)}
                 aria-describedby={errors.confirmPassword ? "confirmPassword-error" : undefined}
-                className={`hw-input h-11 w-full px-3.5 text-sm ${errors.confirmPassword ? "hw-input-error" : ""}`}
+                className={`aegis-input h-11 w-full px-3.5 text-sm ${errors.confirmPassword ? "aegis-input-error" : ""}`}
               />
             </Field>
 
@@ -331,10 +331,10 @@ export function AuthCard() {
                 onChange={(e) => setCountryCode(e.target.value as CountryCode)}
                 aria-invalid={Boolean(errors.country)}
                 aria-describedby={errors.country ? "country-error" : undefined}
-                className={`hw-input h-11 w-full appearance-none px-3.5 text-sm ${
-                  errors.country ? "hw-input-error" : ""
+                className={`aegis-input h-11 w-full appearance-none px-3.5 text-sm ${
+                  errors.country ? "aegis-input-error" : ""
                 }`}
-                style={{ color: countryCode ? "var(--hw-text)" : "var(--hw-muted)" }}
+                style={{ color: countryCode ? "var(--aegis-text)" : "var(--aegis-muted)" }}
               >
                 <option value="" disabled>
                   Select your country
@@ -351,7 +351,7 @@ export function AuthCard() {
                 height="14"
                 viewBox="0 0 24 24"
                 fill="none"
-                style={{ color: "var(--hw-muted)" }}
+                style={{ color: "var(--aegis-muted)" }}
                 aria-hidden="true"
               >
                 <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -364,7 +364,7 @@ export function AuthCard() {
         <button
           type="submit"
           disabled={status !== "idle"}
-          className="hw-submit mt-1 flex h-11 w-full items-center justify-center gap-2 text-sm font-semibold"
+          className="aegis-submit mt-1 flex h-11 w-full items-center justify-center gap-2 text-sm font-semibold"
         >
           {status === "loading" ? (
             <>
@@ -377,8 +377,8 @@ export function AuthCard() {
         </button>
 
         {mode === "signup" ? (
-          <p className="text-center text-xs leading-relaxed" style={{ color: "var(--hw-muted)" }}>
-            By creating an account you agree to HashWhale&apos;s Terms of Service and Privacy Policy.
+          <p className="text-center text-xs leading-relaxed" style={{ color: "var(--aegis-muted)" }}>
+            By creating an account you agree to Aegis Digital&apos;s Terms of Service and Privacy Policy.
           </p>
         ) : null}
       </form>

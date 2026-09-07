@@ -1,6 +1,6 @@
-# HashWhale Web
+# Aegis Digital Web
 
-Next.js frontend for HashWhale, a simulated digital-asset wallet, Earn, and collateralized-borrowing application. It consumes the [hashwhale-core](https://github.com/donum01/hashwhale-core) REST API and presents real database-backed account activity without moving real cryptocurrency.
+Next.js frontend for Aegis Digital, a simulated digital-asset wallet, Earn, and collateralized-borrowing application. It consumes the [aegis-core](https://github.com/donum01/aegis-core) REST API and presents real database-backed account activity without moving real cryptocurrency.
 
 ## Highlights
 
@@ -42,7 +42,7 @@ flowchart LR
     Pages[App Router pages] --> Models[Domain data modules]
     Models --> Client[openapi-fetch client]
     Schema[Generated OpenAPI types] --> Client
-    Client --> API[HashWhale Spring Boot API]
+    Client --> API[Aegis Digital Spring Boot API]
     Auth[JWT storage and expiry handling] --> Client
 ```
 
@@ -57,7 +57,7 @@ flowchart LR
 
 - Node.js 20 or newer
 - npm
-- [hashwhale-core](https://github.com/donum01/hashwhale-core) running at `http://localhost:8080`
+- [aegis-core](https://github.com/donum01/aegis-core) running at `http://localhost:8080`
 
 ### 1. Install dependencies
 
@@ -114,13 +114,13 @@ The JWT is currently stored in `localStorage` for demo simplicity. A production 
 
 ## Demo workflow
 
-The backend repository includes an opt-in seeder that creates a realistic showcase account with reconciled Wallet, Borrow, Earn, and transaction records. From `hashwhale-core`, run:
+The backend repository includes an opt-in seeder that creates a realistic showcase account with reconciled Wallet, Borrow, Earn, and transaction records. From `aegis-core`, run:
 
 ```powershell
 .\scripts\reset-demo-data.ps1
 ```
 
-Then sign in on this frontend using `demo@hashwhale.com` and the password entered into the script.
+Then sign in on this frontend using `demo@aegisdigital.com` and the password entered into the script.
 
 ## Scope and limitations
 

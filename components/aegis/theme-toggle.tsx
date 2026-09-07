@@ -20,10 +20,10 @@ export function ThemeToggle({
       aria-checked={isDark}
       aria-label={isDark ? "Use light theme" : "Use dark theme"}
       onClick={onToggle}
-      className="inline-flex h-11 w-11 items-center justify-center rounded-lg border transition-colors duration-150 hover:bg-[var(--hw-track)]"
+      className="inline-flex h-11 w-11 items-center justify-center rounded-lg border transition-colors duration-150 hover:bg-[var(--aegis-track)]"
       style={{
-        color: "var(--hw-muted)",
-        borderColor: "var(--hw-card-border)",
+        color: "var(--aegis-muted)",
+        borderColor: "var(--aegis-card-border)",
       }}
     >
       {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}

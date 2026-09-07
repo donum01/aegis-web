@@ -1,6 +1,6 @@
-const AUTH_TOKEN_KEY = "hw_token"
-const USER_ID_KEY = "hw_user_id"
-const AUTH_NOTICE_KEY = "hw_auth_notice"
+const AUTH_TOKEN_KEY = "aegis_token"
+const USER_ID_KEY = "aegis_user_id"
+const AUTH_NOTICE_KEY = "aegis_auth_notice"
 
 export function getToken(): string | null {
   if (typeof window === "undefined") return null

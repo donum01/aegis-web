@@ -100,7 +100,7 @@ export function apiDashboardToDashboard(api: ApiDashboardSummary): DashboardSumm
       actionLabel: alert.actionLabel ?? null,
     })),
     recommendation: {
-      title: recommendation?.title ?? "Explore HashWhale",
+      title: recommendation?.title ?? "Explore Aegis Digital",
       message: recommendation?.message ?? "Review your account products.",
       href: recommendation?.href ?? "/wallet",
       actionLabel: recommendation?.actionLabel ?? "Get started",

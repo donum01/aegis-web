@@ -17,9 +17,9 @@ const CONFIG: Record<
   not_started: {
     label: "Not Started",
     icon: CircleDashed,
-    fg: "var(--hw-muted)",
-    bg: "var(--hw-track)",
-    border: "var(--hw-input-border)",
+    fg: "var(--aegis-muted)",
+    bg: "var(--aegis-track)",
+    border: "var(--aegis-input-border)",
   },
   pending: {
     label: "Pending Review",
@@ -31,7 +31,7 @@ const CONFIG: Record<
   verified: {
     label: "Verified",
     icon: CheckCircle2,
-    fg: "var(--hw-success)",
+    fg: "var(--aegis-success)",
     bg: "rgba(16, 217, 160, 0.12)",
     border: "rgba(16, 217, 160, 0.3)",
   },
@@ -53,8 +53,8 @@ export function KycStatus({
   const { label, icon: Icon, fg, bg, border } = CONFIG[state]
 
   return (
-    <div className="hw-fade-slide mt-5 flex items-center justify-between rounded-lg px-3 py-2.5">
-      <span className="text-xs font-medium" style={{ color: "var(--hw-muted)" }}>
+    <div className="aegis-fade-slide mt-5 flex items-center justify-between rounded-lg px-3 py-2.5">
+      <span className="text-xs font-medium" style={{ color: "var(--aegis-muted)" }}>
         Identity verification (KYC)
       </span>
       <span

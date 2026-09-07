@@ -1,11 +1,11 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { ActiveLoans } from "@/components/hashwhale/active-loans"
-import { AppShell } from "@/components/hashwhale/app-shell"
-import { BorrowForm } from "@/components/hashwhale/borrow-form"
-import { useTheme } from "@/components/hashwhale/theme-provider"
-import { Toast, type ToastVariant } from "@/components/hashwhale/toast"
+import { ActiveLoans } from "@/components/aegis/active-loans"
+import { AppShell } from "@/components/aegis/app-shell"
+import { BorrowForm } from "@/components/aegis/borrow-form"
+import { useTheme } from "@/components/aegis/theme-provider"
+import { Toast, type ToastVariant } from "@/components/aegis/toast"
 import {
   apiBalanceToBalance,
   apiBorrowConfigurationToBorrowConfiguration,
@@ -19,7 +19,7 @@ import {
 import { formatAssetAmount } from "@/lib/format"
 import { api } from "@/lib/api"
 import { HISTORY_BATCH_SIZE, historyPageState, type HistoryPageState } from "@/lib/history"
-import { PriceStatus } from "@/components/hashwhale/price-status"
+import { PriceStatus } from "@/components/aegis/price-status"
 import { useAuthUser } from "@/lib/use-auth-user"
 
 const EMPTY_HISTORY_PAGE: HistoryPageState = { hasMore: false, nextCursor: null }
@@ -226,28 +226,28 @@ export default function BorrowPage() {
 
   return (
     <AppShell theme={theme} onToggleTheme={toggleTheme}>
-        <section className="hw-page-header mb-6" aria-labelledby="borrow-heading">
+        <section className="aegis-page-header mb-6" aria-labelledby="borrow-heading">
           <div>
-            <p className="hw-eyebrow">Credit</p>
-            <h1 id="borrow-heading" className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl" style={{ color: "var(--hw-text)" }}>
+            <p className="aegis-eyebrow">Credit</p>
+            <h1 id="borrow-heading" className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl" style={{ color: "var(--aegis-text)" }}>
             Borrow
             </h1>
-            <p className="mt-1.5 text-sm" style={{ color: "var(--hw-muted)" }}>
+            <p className="mt-1.5 text-sm" style={{ color: "var(--aegis-muted)" }}>
               Use BTC or ETH as collateral for a USDT loan.
             </p>
           </div>
         </section>
 
         {!authReady || loading ? (
-          <p className="text-sm" style={{ color: "var(--hw-muted)" }}>
+          <p className="text-sm" style={{ color: "var(--aegis-muted)" }}>
             Loading your loans…
           </p>
         ) : !userId ? (
-          <p className="text-sm" style={{ color: "var(--hw-error)" }}>
+          <p className="text-sm" style={{ color: "var(--aegis-error)" }}>
             Please log in to view and manage your loans.
           </p>
         ) : !configuration ? (
-          <p className="text-sm" style={{ color: "var(--hw-error)" }}>
+          <p className="text-sm" style={{ color: "var(--aegis-error)" }}>
             Borrow configuration is unavailable. Please refresh and try again.
           </p>
         ) : (

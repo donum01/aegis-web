@@ -66,35 +66,35 @@ export function WalletBalanceCard({
   }
 
   return (
-    <div className="hw-data-row p-4 sm:p-5">
+    <div className="aegis-data-row p-4 sm:p-5">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center">
         <div className="flex min-w-0 items-center gap-3 lg:w-52">
           <AssetChip asset={balance.asset} size={40} />
           <div>
-            <p className="text-sm font-semibold" style={{ color: "var(--hw-text)" }}>
+            <p className="text-sm font-semibold" style={{ color: "var(--aegis-text)" }}>
               {ASSETS[balance.asset].name}
             </p>
-            <p className="text-xs" style={{ color: "var(--hw-muted)" }}>{balance.asset}</p>
+            <p className="text-xs" style={{ color: "var(--aegis-muted)" }}>{balance.asset}</p>
           </div>
         </div>
 
         <div className="min-w-0 flex-1 lg:text-right">
-          <p className="text-xs font-medium" style={{ color: "var(--hw-muted)" }}>Available</p>
-          <p className="mt-0.5 text-sm font-semibold tabular-nums" style={{ color: "var(--hw-text)" }}>
+          <p className="text-xs font-medium" style={{ color: "var(--aegis-muted)" }}>Available</p>
+          <p className="mt-0.5 text-sm font-semibold tabular-nums" style={{ color: "var(--aegis-text)" }}>
             {formatAssetAmount(balance.availableAmount, balance.asset)}
           </p>
-          <p className="mt-0.5 text-xs tabular-nums" style={{ color: "var(--hw-muted)" }}>
+          <p className="mt-0.5 text-xs tabular-nums" style={{ color: "var(--aegis-muted)" }}>
             {usdValueFormatter.format(availableValue)} available value
           </p>
         </div>
 
         {balance.lockedAmount > 0 ? (
           <div className="min-w-0 flex-1 lg:text-right">
-            <p className="text-xs font-medium" style={{ color: "var(--hw-muted)" }}>Locked</p>
-            <p className="mt-0.5 text-sm font-semibold tabular-nums" style={{ color: "var(--hw-text)" }}>
+            <p className="text-xs font-medium" style={{ color: "var(--aegis-muted)" }}>Locked</p>
+            <p className="mt-0.5 text-sm font-semibold tabular-nums" style={{ color: "var(--aegis-text)" }}>
               {formatAssetAmount(balance.lockedAmount, balance.asset)}
             </p>
-            <p className="mt-0.5 text-xs tabular-nums" style={{ color: "var(--hw-muted)" }}>
+            <p className="mt-0.5 text-xs tabular-nums" style={{ color: "var(--aegis-muted)" }}>
               {usdValueFormatter.format(lockedValue)} locked value
             </p>
           </div>
@@ -105,14 +105,14 @@ export function WalletBalanceCard({
             <button
               type="button"
               onClick={() => openMode("deposit")}
-              className="hw-btn-outline flex h-11 flex-1 items-center justify-center gap-1.5 px-3 text-xs font-semibold lg:flex-none"
+              className="aegis-btn-outline flex h-11 flex-1 items-center justify-center gap-1.5 px-3 text-xs font-semibold lg:flex-none"
             >
               <ArrowDownToLine className="h-3.5 w-3.5" /> Deposit
             </button>
             <button
               type="button"
               onClick={() => openMode("withdraw")}
-              className="hw-btn-outline flex h-11 flex-1 items-center justify-center gap-1.5 px-3 text-xs font-semibold lg:flex-none"
+              className="aegis-btn-outline flex h-11 flex-1 items-center justify-center gap-1.5 px-3 text-xs font-semibold lg:flex-none"
             >
               <ArrowUpFromLine className="h-3.5 w-3.5" /> Withdraw
             </button>
@@ -121,16 +121,16 @@ export function WalletBalanceCard({
       </div>
 
       {mode !== "idle" ? (
-        <div className="hw-fade-slide mt-4 border-t pt-4" style={{ borderColor: "var(--hw-card-border)" }}>
+        <div className="aegis-fade-slide mt-4 border-t pt-4" style={{ borderColor: "var(--aegis-card-border)" }}>
           <div className="max-w-xl sm:ml-auto">
-            <p className="mb-2 text-xs font-medium" style={{ color: "var(--hw-primary)" }}>
+            <p className="mb-2 text-xs font-medium" style={{ color: "var(--aegis-primary)" }}>
               Demo ledger only. No real funds move.
             </p>
-            {error ? <p id={errorId} className="mb-2 text-xs font-medium" style={{ color: "var(--hw-error)" }} role="alert">{error}</p> : null}
+            {error ? <p id={errorId} className="mb-2 text-xs font-medium" style={{ color: "var(--aegis-error)" }} role="alert">{error}</p> : null}
             {!reviewing ? (
               <div className="flex flex-col gap-2 sm:flex-row sm:items-end">
               <div className="flex-1">
-                <label htmlFor={inputId} className="mb-1.5 block text-sm font-medium" style={{ color: "var(--hw-text)" }}>
+                <label htmlFor={inputId} className="mb-1.5 block text-sm font-medium" style={{ color: "var(--aegis-text)" }}>
                   {mode === "deposit" ? "Deposit" : "Withdrawal"} amount
                 </label>
                 <div className="relative">
@@ -150,33 +150,33 @@ export function WalletBalanceCard({
                   }}
                   aria-invalid={exceedsAvailable || Boolean(error)}
                   aria-describedby={`${helpId}${error ? ` ${errorId}` : ""}`}
-                  className={`hw-input h-11 w-full pl-3.5 pr-16 text-sm tabular-nums ${exceedsAvailable ? "hw-input-error" : ""}`}
+                  className={`aegis-input h-11 w-full pl-3.5 pr-16 text-sm tabular-nums ${exceedsAvailable ? "aegis-input-error" : ""}`}
                 />
-                <span className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-semibold" style={{ color: "var(--hw-muted)" }}>
+                <span className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-semibold" style={{ color: "var(--aegis-muted)" }}>
                   {balance.asset}
                 </span>
               </div>
               </div>
-              <button type="button" onClick={close} className="hw-btn-outline h-11 px-4 text-sm font-semibold">Cancel</button>
+              <button type="button" onClick={close} className="aegis-btn-outline h-11 px-4 text-sm font-semibold">Cancel</button>
               <button
                 type="button"
                 onClick={() => setReviewing(true)}
                 disabled={!valid}
-                className="hw-submit flex h-11 items-center justify-center gap-1.5 px-4 text-sm font-semibold"
+                className="aegis-submit flex h-11 items-center justify-center gap-1.5 px-4 text-sm font-semibold"
               >
                 Review {mode === "deposit" ? "deposit" : "withdrawal"}
               </button>
             </div>
             ) : (
-              <div className="rounded-lg border p-4" style={{ borderColor: "var(--hw-card-border)", background: "var(--hw-track)" }}>
-                <p className="text-sm font-semibold" style={{ color: "var(--hw-text)" }}>Review simulated {mode}</p>
+              <div className="rounded-lg border p-4" style={{ borderColor: "var(--aegis-card-border)", background: "var(--aegis-track)" }}>
+                <p className="text-sm font-semibold" style={{ color: "var(--aegis-text)" }}>Review simulated {mode}</p>
                 <dl className="mt-3 grid grid-cols-1 gap-2 text-sm sm:grid-cols-2">
-                  <div><dt style={{ color: "var(--hw-muted)" }}>Amount</dt><dd className="font-semibold tabular-nums">{formatAssetAmount(amountNum, balance.asset)}</dd></div>
-                  <div><dt style={{ color: "var(--hw-muted)" }}>Available after</dt><dd className="font-semibold tabular-nums">{formatAssetAmount(resultingAvailable, balance.asset)}</dd></div>
+                  <div><dt style={{ color: "var(--aegis-muted)" }}>Amount</dt><dd className="font-semibold tabular-nums">{formatAssetAmount(amountNum, balance.asset)}</dd></div>
+                  <div><dt style={{ color: "var(--aegis-muted)" }}>Available after</dt><dd className="font-semibold tabular-nums">{formatAssetAmount(resultingAvailable, balance.asset)}</dd></div>
                 </dl>
                 <div className="mt-4 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
-                  <button type="button" onClick={() => setReviewing(false)} disabled={status === "loading"} className="hw-btn-outline h-11 px-4 text-sm font-semibold">Back</button>
-                  <button type="button" onClick={submit} disabled={status === "loading"} className="hw-submit flex h-11 items-center justify-center gap-1.5 px-4 text-sm font-semibold">
+                  <button type="button" onClick={() => setReviewing(false)} disabled={status === "loading"} className="aegis-btn-outline h-11 px-4 text-sm font-semibold">Back</button>
+                  <button type="button" onClick={submit} disabled={status === "loading"} className="aegis-submit flex h-11 items-center justify-center gap-1.5 px-4 text-sm font-semibold">
                     {status === "loading" ? <Loader2 className="h-3.5 w-3.5 animate-spin" aria-hidden="true" /> : null}
                     Confirm {mode === "deposit" ? "deposit" : "withdrawal"}
                   </button>
@@ -184,7 +184,7 @@ export function WalletBalanceCard({
               </div>
             )}
             {mode === "withdraw" ? (
-              <p id={helpId} className="mt-2 text-xs" style={{ color: exceedsAvailable ? "var(--hw-error)" : "var(--hw-muted)" }} aria-live="polite">
+              <p id={helpId} className="mt-2 text-xs" style={{ color: exceedsAvailable ? "var(--aegis-error)" : "var(--aegis-muted)" }} aria-live="polite">
                 {exceedsAvailable
                   ? `Amount exceeds your available balance of ${formatAssetAmount(balance.availableAmount, balance.asset)}.`
                   : `Available: ${formatAssetAmount(balance.availableAmount, balance.asset)}`}

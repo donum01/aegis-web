@@ -1,5 +1,5 @@
 /* ===========================================================================
-   HASHWHALE — WALLET DATA LAYER
+   AEGIS DIGITAL — WALLET DATA LAYER
 =========================================================================== */
 
 import type { components } from "./api-schema"

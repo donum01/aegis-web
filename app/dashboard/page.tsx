@@ -2,12 +2,12 @@
 
 import { useCallback, useEffect, useState } from "react"
 import { CloudOff, Radio, RefreshCw } from "lucide-react"
-import { AppShell } from "@/components/hashwhale/app-shell"
-import { ActionCenter, CapitalAllocation, ProductHealth, RecommendedAction } from "@/components/hashwhale/dashboard-insights"
-import { DashboardOverview } from "@/components/hashwhale/dashboard-overview"
-import { MarketPriceChart } from "@/components/hashwhale/market-price-chart"
-import { TransactionHistory } from "@/components/hashwhale/transaction-history"
-import { useTheme } from "@/components/hashwhale/theme-provider"
+import { AppShell } from "@/components/aegis/app-shell"
+import { ActionCenter, CapitalAllocation, ProductHealth, RecommendedAction } from "@/components/aegis/dashboard-insights"
+import { DashboardOverview } from "@/components/aegis/dashboard-overview"
+import { MarketPriceChart } from "@/components/aegis/market-price-chart"
+import { TransactionHistory } from "@/components/aegis/transaction-history"
+import { useTheme } from "@/components/aegis/theme-provider"
 import { api } from "@/lib/api"
 import { accountName, apiDashboardToDashboard, type DashboardSummary } from "@/lib/dashboard"
 import { useAuthUser } from "@/lib/use-auth-user"
@@ -73,47 +73,47 @@ export default function DashboardPage() {
     <AppShell theme={theme} onToggleTheme={toggleTheme}>
         {!authReady || loading ? (
           <div className="space-y-5 py-8" aria-label="Loading dashboard">
-            <div className="h-10 w-72 animate-pulse rounded-lg" style={{ background: "var(--hw-track)" }} />
+            <div className="h-10 w-72 animate-pulse rounded-lg" style={{ background: "var(--aegis-track)" }} />
             <div className="grid grid-cols-1 gap-4 lg:grid-cols-4">
-              {[0, 1, 2, 3].map((item) => <div key={item} className="h-44 animate-pulse rounded-xl" style={{ background: "var(--hw-track)" }} />)}
+              {[0, 1, 2, 3].map((item) => <div key={item} className="h-44 animate-pulse rounded-xl" style={{ background: "var(--aegis-track)" }} />)}
             </div>
-            <div className="h-96 animate-pulse rounded-xl" style={{ background: "var(--hw-track)" }} />
+            <div className="h-96 animate-pulse rounded-xl" style={{ background: "var(--aegis-track)" }} />
           </div>
         ) : !userId ? (
-          <p className="text-sm" style={{ color: "var(--hw-error)" }}>Please log in to access your dashboard.</p>
+          <p className="text-sm" style={{ color: "var(--aegis-error)" }}>Please log in to access your dashboard.</p>
         ) : !summary ? (
-          <div className="hw-card max-w-lg p-6">
-            <p className="text-sm font-semibold" style={{ color: "var(--hw-error)" }}>{error ?? "Dashboard data is unavailable."}</p>
-            <button type="button" onClick={() => void loadSummary()} className="hw-btn-outline mt-4 flex items-center gap-2 px-4 py-2 text-sm font-semibold">
+          <div className="aegis-card max-w-lg p-6">
+            <p className="text-sm font-semibold" style={{ color: "var(--aegis-error)" }}>{error ?? "Dashboard data is unavailable."}</p>
+            <button type="button" onClick={() => void loadSummary()} className="aegis-btn-outline mt-4 flex items-center gap-2 px-4 py-2 text-sm font-semibold">
               <RefreshCw className="h-4 w-4" /> Try again
             </button>
           </div>
         ) : (
           <div className="flex flex-col gap-6 sm:gap-7">
-            <section className="hw-page-header" aria-labelledby="dashboard-heading">
+            <section className="aegis-page-header" aria-labelledby="dashboard-heading">
               <div>
-                <p className="hw-eyebrow">Account overview</p>
-                <h1 id="dashboard-heading" className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl" style={{ color: "var(--hw-text)" }}>
+                <p className="aegis-eyebrow">Account overview</p>
+                <h1 id="dashboard-heading" className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl" style={{ color: "var(--aegis-text)" }}>
                   Welcome, {accountName(summary.email)}
                 </h1>
-                <p className="mt-1.5 max-w-2xl text-sm leading-relaxed" style={{ color: "var(--hw-muted)" }}>
+                <p className="mt-1.5 max-w-2xl text-sm leading-relaxed" style={{ color: "var(--aegis-muted)" }}>
                   Review account health, market prices, and items that need attention.
                 </p>
               </div>
               <div className="flex flex-col items-start gap-1.5 text-xs sm:items-end">
-                <span className="flex items-center gap-1.5 font-semibold" style={{ color: livePrices ? "var(--hw-ltv-safe)" : "var(--hw-ltv-warn)" }}>
+                <span className="flex items-center gap-1.5 font-semibold" style={{ color: livePrices ? "var(--aegis-ltv-safe)" : "var(--aegis-ltv-warn)" }}>
                   {livePrices ? <Radio className="h-3.5 w-3.5" /> : <CloudOff className="h-3.5 w-3.5" />}
                   {livePrices ? "Live portfolio pricing" : "Fallback portfolio pricing"}
                   {refreshing ? <RefreshCw className="ml-1 h-3 w-3 animate-spin" /> : null}
                 </span>
-                <span style={{ color: "var(--hw-muted)" }}>
+                <span style={{ color: "var(--aegis-muted)" }}>
                   {summary.pricesUpdatedAt ? `As of ${updatedAtFormatter.format(new Date(summary.pricesUpdatedAt))}` : "Waiting for a live provider update"}
                 </span>
               </div>
             </section>
 
             {error ? (
-              <p className="rounded-lg px-3 py-2 text-xs" style={{ color: "var(--hw-ltv-warn)", background: "var(--hw-track)" }} role="status">
+              <p className="rounded-lg px-3 py-2 text-xs" style={{ color: "var(--aegis-ltv-warn)", background: "var(--aegis-track)" }} role="status">
                 {error} Displaying the last dashboard snapshot.
               </p>
             ) : null}
@@ -130,7 +130,7 @@ export default function DashboardPage() {
             <RecommendedAction summary={summary} />
             <TransactionHistory transactions={summary.recentTransactions} title="Latest activity" />
 
-            <p className="pb-2 text-center text-[11px] leading-relaxed" style={{ color: "var(--hw-muted)" }}>
+            <p className="pb-2 text-center text-[11px] leading-relaxed" style={{ color: "var(--aegis-muted)" }}>
               Demo environment. Figures and prompts are illustrative and are not financial advice.
             </p>
           </div>

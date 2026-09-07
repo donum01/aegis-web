@@ -16,7 +16,7 @@ export function Field({
 }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label htmlFor={id} className="text-sm font-medium" style={{ color: "var(--hw-text)" }}>
+      <label htmlFor={id} className="text-sm font-medium" style={{ color: "var(--aegis-text)" }}>
         {label}
       </label>
       <div className="relative">{children}</div>
@@ -24,8 +24,8 @@ export function Field({
         <p
           id={`${id}-error`}
           key={error}
-          className="hw-fade-slide flex items-center gap-1 text-xs font-medium"
-          style={{ color: "var(--hw-error)" }}
+          className="aegis-fade-slide flex items-center gap-1 text-xs font-medium"
+          style={{ color: "var(--aegis-error)" }}
           role="alert"
         >
           <AlertCircle className="h-3.5 w-3.5 shrink-0" />
